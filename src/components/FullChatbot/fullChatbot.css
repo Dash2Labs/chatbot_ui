@@ -1,0 +1,122 @@
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #242424;
+  border-radius: 20px;
+  border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #fff;
+}
+:root {
+  --toolbar-height: 60px;
+  --font-size: 14px;
+  --light-font-color: #fff;
+  --dark-font-color: #242424;
+  --font-color: #242424;
+  --font-family: "Montserrat", serif;
+  --icon-bg-color: #e31837;
+}
+
+.dark-theme {
+  --background-color: #242424;
+  --font-color: #ffffff;
+}
+body {
+  font-family: var(--font-family);
+}
+p {
+  margin: 0;
+}
+.main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.sidebar {
+  width: 100%;
+  max-width: 260px;
+  padding: 20px;
+  transition: max-width  ease-in-out 0.2s;
+}
+.arrow {
+  position: absolute;
+  left: 290px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--icon-bg-color);
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+  transition: all ease-in-out 0.2s;
+  box-shadow: 0px 3px 6px #00000014;
+}
+.arrow img {
+  cursor: pointer;
+}
+.page-layouts {
+  width: 100%;
+}
+.toolbar {
+  position: sticky;
+  top: 0;
+  height: 100%;
+  max-height: 72px;
+  display: flex;
+  justify-content: flex-end;
+}
+.main-pages {
+  height: calc(100vh - 175px);
+}
+.collapsed {
+  max-width: 70px;
+  padding: 0;
+}
+.collapsed-arrow {
+  left: 60px;
+}
+.collapsed-arrow img {
+  transform: rotate(180deg);
+}
+.collapsed-menu {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center;
+}
+.history-box-button {
+  margin-left: 0;
+}
+.logo-wrapper {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center;
+}
+.icon-view {
+  padding-top: 20px;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 9;
+  }
+  .collapsed {
+    position: relative;
+  }
+}

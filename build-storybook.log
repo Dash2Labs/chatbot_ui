@@ -1,0 +1,28 @@
+
+> chatbot-ai-lib@1.1.5 build-storybook
+> storybook build --output-dir=/tmp/chromatic--6732-RP2647MBiJXf --webpack-stats-json=/tmp/chromatic--6732-RP2647MBiJXf
+
+[1m@storybook/core v8.4.7
+[22m
+info => Cleaning outputDir: [36m../../../../../tmp/chromatic--6732-RP2647MBiJXf[39m
+info => Loading presets
+info => Building manager..
+info => Manager built ([38;2;181;126;229m192 ms[39m)
+info => Building preview..
+WARN No story files found for the specified pattern: [34msrc/**/*.mdx[39m
+info => Using implicit CSS loaders
+info => Using default Webpack5 setup
+WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+WARN This can impact web performance.
+WARN Assets: 
+WARN   685.4b1d14d2.iframe.bundle.js (755 KiB)
+WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+WARN Entrypoints:
+WARN   main (765 KiB)
+WARN       runtime~main.4dcf4962.iframe.bundle.js
+WARN       685.4b1d14d2.iframe.bundle.js
+WARN       main.6c42ec55.iframe.bundle.js
+WARN 
+info => Preview built ([38;2;181;126;229m2.21 s[39m)
+info => preview stats written to [36m/tmp/chromatic--6732-RP2647MBiJXf/preview-stats.json[39m
+info => Output directory: /tmp/chromatic--6732-RP2647MBiJXf

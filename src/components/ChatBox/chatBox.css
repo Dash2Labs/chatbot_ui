@@ -1,0 +1,109 @@
+/* :root {
+  --cb-bg-color: #fbfbfb;
+  --cb-font-color: #242424;
+  --cb-input-bg-color: #ffffff;
+  --cb-input-border-color: #e9e9e9;
+  --cb-button-bg-color: #e31837;
+  --cb-disabled-button-bg-color: lightgray;
+  --scrollbar-color: #bdbdbd;
+}
+
+.dark-theme {
+  --cb-bg-color: #242424;
+  --cb-font-color: #ffffff;
+  --cb-input-bg-color: #2e2e2e;
+  --cb-input-border-color: #555555;
+  --cb-button-bg-color: #333333;
+  --cb-disabled-button-bg-color: #555555;
+  --scrollbar-color: #444444;
+} */
+
+.chat-box-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 30px;
+  margin-bottom: 20px;
+  background-color: var(--cb-bg-color);
+  padding: 30px 20px 20px 30px;
+}
+
+.chat-box-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  color: var(--cb-font-color);
+}
+
+.chat-box-messages::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.chat-box-messages::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 20px;
+  border: 2px solid var(--cb-bg-color);
+}
+
+.chat-box-messages::-webkit-scrollbar-track {
+  background: var(--cb-bg-color);
+  border-radius: 5px;
+}
+
+.chat-box-input-area {
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  background-color: transparent;
+}
+
+.chat-box-input {
+  flex-grow: 1;
+  border: 1px solid #e9e9e9;
+  border-radius: 30px;
+  padding: 14px 20px;
+  margin-right: 10px;
+  outline: none;
+  width: calc(100% - 52px);
+  font-size: 14px;
+}
+
+.chat-box-submit-btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.chat-box-submit-btn:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+.input-upload-container {
+  width: 100%;
+  position: relative;
+}
+
+.chat-box-file-input {
+  display: none;
+}
+
+.input-file-icon {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  cursor: pointer;
+}
+.page-title {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}

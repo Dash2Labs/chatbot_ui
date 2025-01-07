@@ -1,0 +1,22 @@
+.accessibility-btn {
+  box-shadow: 0px 3px 6px #00000014;
+  border-radius: 30px;
+  background: #fff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 25px;
+  position: absolute;
+  bottom: 25px;
+}
+.accessibility-btn p {
+  font-size: 14px;
+  padding-left: 10px;
+}
+.collapsed-accessibility {
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
+  cursor: pointer;
+}

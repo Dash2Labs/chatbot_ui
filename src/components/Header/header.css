@@ -1,0 +1,22 @@
+.profile {
+  box-shadow: 0px 3px 6px #00000014;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e31837;
+}
+.headers {
+  font-family: "Montserrat", serif;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px;
+  font-weight: normal;
+}
+.user-name {
+  margin-right: 20px;
+  font-size: 14px;
+}

@@ -1,0 +1,72 @@
+/* General styles for History Card */
+.history-card-container {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 3px 6px #00000014;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  background-color: var(--background-color);
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.history-card-container.selected {
+  border-color: #e31837; /* Red color when selected */
+}
+
+.history-card-title {
+  font-weight: bold;
+  color: var(--font-color);
+  white-space: nowrap; /* Ensures text doesn't wrap */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
+  margin: 0;
+  font-size: var(--font-size);
+  margin-bottom: 5px;
+}
+
+.history-card-timeStamps {
+  color: #acacac;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap; /* Ensures text doesn't wrap */
+  overflow: hidden; /* Prevents content overflow */
+  text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
+}
+.history-card-timeStamps p {
+  font-weight: normal;
+}
+.history-card-active {
+  padding: 2px 6px;
+  background-color: rgba(0, 61, 121, 0.1);
+  color: #003d79;
+  border-radius: 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+p {
+  margin: 0;
+}
+
+.logo-icon {
+  margin-bottom: 30px;
+}
+
+/* For Light Theme */
+.history-card-container.light-theme {
+  --background-color: #ffffff;
+  --font-color: #000000;
+  --font-size: 16px; /* Adjust based on the font size defined in the theme */
+}
+
+/* For Dark Theme */
+.history-card-container.dark-theme {
+  --background-color: #313131;
+  --font-color: #ffffff;
+  --font-size: 16px; /* Adjust based on the font size defined in the theme */
+}

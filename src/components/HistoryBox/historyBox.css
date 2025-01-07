@@ -1,0 +1,63 @@
+:root {
+  --background-color: #f9f9f9;
+  --font-color: #000000;
+  --input-background-color: #ffffff;
+  --input-border-color: #f3f3f3;
+  --button-background-color: #ffffff;
+}
+
+.dark-theme {
+  --background-color: transparent;
+  --font-color: #ffffff;
+  --input-background-color: #2e2e2e;
+  --input-border-color: transparent;
+  --button-background-color: #e31837;
+}
+
+.history-box-container {
+  font-family: "Montserrat", serif;
+  /* background-color: var(--background-color); */
+  color: var(--font-color);
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.history-box-cards {
+  overflow-y: auto;
+  max-height: calc(100vh - 295px);
+}
+.history-box-search {
+  display: flex;
+  margin-bottom: 23px;
+}
+
+.history-box-input {
+  flex: 1;
+  padding: 10px 20px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 10px;
+  background-color: var(--input-background-color);
+  width: 100%;
+  max-width: 208px;
+  margin-right: 10px;
+  color: var(--font-color);
+}
+
+.history-box-button {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--button-background-color);
+  cursor: pointer;
+  box-shadow: 0px 3px 6px #00000014;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-icon {
+  width: 100%;
+  max-width: 200px;
+}
