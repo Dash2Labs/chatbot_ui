@@ -26,7 +26,19 @@
   --font-family: "Montserrat", serif;
   --icon-bg-color: #e31837;
 }
+.small {
+  font-size: 14px;
+}
 
+.medium {
+  font-size: 16px;
+}
+.large {
+  font-size: 18px;
+}
+.extra-large {
+  font-size: 20px;
+}
 .dark-theme {
   --background-color: #242424;
   --font-color: #ffffff;
@@ -46,7 +58,7 @@ p {
   width: 100%;
   max-width: 260px;
   padding: 20px;
-  transition: max-width  ease-in-out 0.2s;
+  transition: max-width ease-in-out 0.2s;
 }
 .arrow {
   position: absolute;
@@ -78,9 +90,10 @@ p {
   max-height: 72px;
   display: flex;
   justify-content: flex-end;
+  min-height: 72px;
 }
 .main-pages {
-  height: calc(100vh - 175px);
+  height: calc(100vh - 72px);
 }
 .collapsed {
   max-width: 70px;
@@ -118,5 +131,14 @@ p {
   }
   .collapsed {
     position: relative;
+  }
+}
+@media (max-width: 600px) {
+  .arrow {
+    display: none;
+  }
+  .sidebar {
+    margin: 0 auto;
+    width: calc(100% - 60px);
   }
 }

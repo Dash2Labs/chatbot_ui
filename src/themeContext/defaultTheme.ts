@@ -24,6 +24,7 @@ export const defaultThemes = {
     profile_font_color: "#E31837",
     primary_font_color: "#242424",
     modal_main_bg: "rgba(255, 255, 255, 0.7)",
+    theme_color: "#E31837",
   },
   dark: {
     hc_bg_color: "#313131",
@@ -50,5 +51,6 @@ export const defaultThemes = {
     profile_font_color: "#fff",
     primary_font_color: "#FFF",
     modal_main_bg: "rgba(0, 0, 0, 0.7)",
+    theme_color: "#E31837",
   },
 };

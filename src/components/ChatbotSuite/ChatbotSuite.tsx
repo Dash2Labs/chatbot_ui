@@ -4,15 +4,22 @@ import FullChatbot from "../FullChatbot";
 
 interface ChatbotSuiteProps {
   history: any;
-  onChatSubmit: (message: string) => void;
-  onScroll: () => void;
-  onScrollTop: () => void;
-  onScrollBottom: () => void;
+  onChatSubmit: (message: string, sessionId?: string) => void;
+  onChatScroll: () => void;
+  onChatScrollTop: () => void;
+  onChatScrollBottom: () => void;
   onSearchChange: (term: string) => void;
   onCardClick: (cardDetails: any) => void;
-  onFileUpload: (file: File) => void;
+  onFileUpload: (file: File, sessionId?: string) => void;
   onCreateNewChat: () => void;
   chats: any;
+  onStarClick?: (star: number, chatId?: string, sessionId?: string) => void;
+  onTextFeedbackSubmit?: (
+    feedback: string,
+    chatId?: string,
+    sessionId?: string
+  ) => void;
+  sessionId?: string;
 }
 
 const ChatbotSuite: React.FC<ChatbotSuiteProps> = ({
@@ -22,10 +29,13 @@ const ChatbotSuite: React.FC<ChatbotSuiteProps> = ({
   onCreateNewChat,
   chats,
   onChatSubmit,
-  onScroll,
-  onScrollBottom,
-  onScrollTop,
+  onChatScroll,
+  onChatScrollBottom,
+  onChatScrollTop,
   onFileUpload,
+  sessionId,
+  onStarClick,
+  onTextFeedbackSubmit,
 }) => {
   return (
     <ThemeProvider>
@@ -36,10 +46,13 @@ const ChatbotSuite: React.FC<ChatbotSuiteProps> = ({
         onCreateNewChat={onCreateNewChat}
         chats={chats}
         onChatSubmit={onChatSubmit}
-        onScroll={onScroll}
-        onScrollBottom={onScrollBottom}
-        onScrollTop={onScrollTop}
+        onChatScroll={onChatScroll}
+        onChatScrollBottom={onChatScrollBottom}
+        onChatScrollTop={onChatScrollTop}
         onFileUpload={onFileUpload}
+        sessionId={sessionId}
+        onStarClick={onStarClick}
+        onTextFeedbackSubmit={onTextFeedbackSubmit}
       />
     </ThemeProvider>
   );

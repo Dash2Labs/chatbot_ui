@@ -28,58 +28,118 @@ export const Default: Story = {
         timeStamps: "2023-11-15 10:30 AM",
         isActive: false,
       },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
-      {
-        title: "Team Meeting Notes",
-        timeStamps: "2023-11-14 02:00 PM",
-        isActive: false,
-      },
     ],
     chats: [
       {
         type: "ai",
         text: "Hello! How can I assist you today?",
         timestamp: "10:00 AM",
+        chatId: "1",
+        sessionId: "session-123",
+        ratingEnabled: true,
+        textFeedbackEnabled: true,
       },
       {
         type: "user",
         text: "Can you tell me about the weather?",
         timestamp: "10:01 AM",
+        chatId: "2",
+        sessionId: "session-123",
       },
-      { type: "ai", text: "Sure! It’s sunny and 75°F.", timestamp: "10:02 AM" },
+      {
+        type: "ai",
+        text: "It’s sunny and 75°F.",
+        timestamp: "10:02 AM",
+        chatId: "3",
+        sessionId: "session-123",
+        ratingEnabled: true,
+      },
     ],
-    onChatSubmit: (message: string) => alert(`User submitted: ${message}`),
-    onScroll: () => console.log("Scrolled through chat"),
-    onScrollTop: () => console.log("Scrolled to top"),
-    onScrollBottom: () => console.log("Scrolled to bottom"),
+    sessionId: "session-123",
+    onChatSubmit: (message: string, sessionId?: string) =>
+      alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
+    onChatScroll: () => console.log("Scrolled through chat"),
+    onChatScrollTop: () => console.log("Scrolled to top"),
+    onChatScrollBottom: () => console.log("Scrolled to bottom"),
     onSearchChange: (term: string) => console.log(`Search term: ${term}`),
     onCardClick: (cardDetails) =>
-      alert(`Card clicked: ${JSON.stringify(cardDetails)}`),
-    onFileUpload: (file: File) => console.log(`File uploaded: ${file.name}`),
+      alert(`Card clicked:\n${JSON.stringify(cardDetails, null, 2)}`),
+    onFileUpload: (file: File, sessionId?: string) =>
+      alert(`File uploaded:\nFile: ${file.name}\nSession ID: ${sessionId}`),
     onCreateNewChat: () => alert("New chat created"),
+    onStarClick: (star: number, chatId?: string, sessionId?: string) =>
+      alert(
+        `Star clicked:\nStars: ${star}\nChat ID: ${chatId}\nSession ID: ${sessionId}`
+      ),
+    onTextFeedbackSubmit: (
+      feedback: string,
+      chatId?: string,
+      sessionId?: string
+    ) =>
+      alert(
+        `Feedback submitted:\nFeedback: ${feedback}\nChat ID: ${chatId}\nSession ID: ${sessionId}`
+      ),
+  },
+};
+
+export const LongChatHistory: Story = {
+  args: {
+    history: [
+      { title: "Chat 1", timeStamps: "2023-11-10 09:00 AM", isActive: false },
+      { title: "Chat 2", timeStamps: "2023-11-11 11:00 AM", isActive: true },
+    ],
+    chats: Array.from({ length: 50 }, (_, i) => ({
+      type: i % 2 === 0 ? "ai" : "user",
+      text: `This is message #${i + 1}`,
+      timestamp: `10:${String(i).padStart(2, "0")} AM`,
+      chatId: `chat-${i + 1}`,
+      sessionId: "session-456",
+    })),
+    sessionId: "session-456",
+    onChatSubmit: (message: string, sessionId?: string) =>
+      alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
+    onChatScrollTop: () => console.log("Scrolled to top"),
+    onChatScrollBottom: () => console.log("Scrolled to bottom"),
+  },
+};
+
+export const FeedbackAndRatingEnabled: Story = {
+  args: {
+    history: [
+      { title: "Customer Support", timeStamps: "2023-11-12 03:00 PM", isActive: true },
+    ],
+    chats: [
+      {
+        type: "ai",
+        text: "How satisfied are you with this response?",
+        timestamp: "10:05 AM",
+        chatId: "1",
+        sessionId: "session-789",
+        ratingEnabled: true,
+        textFeedbackEnabled: true,
+      },
+      {
+        type: "user",
+        text: "This is great, thank you!",
+        timestamp: "10:06 AM",
+        chatId: "2",
+        sessionId: "session-789",
+      },
+    ],
+    sessionId: "session-789",
+    onChatSubmit: (message: string, sessionId?: string) =>
+      alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
+    onStarClick: (star: number, chatId?: string, sessionId?: string) =>
+      alert(
+        `Star clicked:\nStars: ${star}\nChat ID: ${chatId}\nSession ID: ${sessionId}`
+      ),
+    onTextFeedbackSubmit: (
+      feedback: string,
+      chatId?: string,
+      sessionId?: string
+    ) =>
+      alert(
+        `Feedback submitted:\nFeedback: ${feedback}\nChat ID: ${chatId}\nSession ID: ${sessionId}`
+      ),
   },
 };

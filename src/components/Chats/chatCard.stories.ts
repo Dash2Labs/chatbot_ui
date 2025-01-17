@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from "@storybook/react";
 import ChatCard from "./chatCard";
 
@@ -46,7 +45,8 @@ export const WithStarsOnly: Story = {
     text: "How satisfied are you with this response?",
     timestamp: "10:34 AM",
     ratingEnabled: true,
-    onFeedbackSubmit: (stars) => alert(`Rated ${stars} star(s)`),
+    onStarClick: (stars, chatId, sessionId) =>
+      alert(`Rated ${stars} star(s) for Chat ID: ${chatId}, Session ID: ${sessionId}`),
   },
 };
 
@@ -57,11 +57,13 @@ export const WithStarsAndTextFeedback: Story = {
     timestamp: "10:35 AM",
     ratingEnabled: true,
     textFeedbackEnabled: true,
-    onFeedbackSubmit: (stars, textFeedback) =>
-      alert(
-        `Feedback submitted:\nStars: ${stars ?? "No rating"}\nText: ${
-          textFeedback || "No comments"
-        }`
+    onStarClick: (stars, chatId, sessionId) =>
+      console.log(
+        `Rated ${stars} star(s) for Chat ID: ${chatId}, Session ID: ${sessionId}`
+      ),
+    onTextFeedbackSubmit: (textFeedback, chatId, sessionId) =>
+      console.log(
+        `Text Feedback: "${textFeedback}" for Chat ID: ${chatId}, Session ID: ${sessionId}`
       ),
   },
 };
@@ -75,6 +77,14 @@ export const WithExistingFeedbackAndRating: Story = {
     rating: 5,
     ratingEnabled: true,
     textFeedbackEnabled: true,
+    onStarClick: (stars, chatId, sessionId) =>
+      console.log(
+        `Updated Rating: ${stars} for Chat ID: ${chatId}, Session ID: ${sessionId}`
+      ),
+    onTextFeedbackSubmit: (textFeedback, chatId, sessionId) =>
+      console.log(
+        `Updated Feedback: "${textFeedback}" for Chat ID: ${chatId}, Session ID: ${sessionId}`
+      ),
   },
 };
 
@@ -103,14 +113,16 @@ export const FullFeedbackExample: Story = {
     timestamp: "10:39 AM",
     ratingEnabled: true,
     textFeedbackEnabled: true,
-    onFeedbackSubmit: (stars, textFeedback) =>
-      alert(
-        `Feedback submitted:\nStars: ${stars ?? "No rating"}\nText: ${
-          textFeedback || "No comments"
-        }`
+    onStarClick: (stars, chatId, sessionId) =>
+      console.log(
+        `Rated ${stars} star(s) for Chat ID: ${chatId}, Session ID: ${sessionId}`
+      ),
+    onTextFeedbackSubmit: (textFeedback, chatId, sessionId) =>
+      console.log(
+        `Feedback submitted:
+Text: "${textFeedback || "No comments"}" for Chat ID: ${chatId}, Session ID: ${sessionId}`
       ),
     feedback: "This is good but could use more details.",
     rating: 4,
   },
 };
-

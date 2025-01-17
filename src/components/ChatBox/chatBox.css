@@ -17,12 +17,13 @@
   --cb-disabled-button-bg-color: #555555;
   --scrollbar-color: #444444;
 } */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
 .chat-box-container {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  height: 100%;
+  height: calc(100vh - 170px);
   overflow: hidden;
   margin: 0 30px;
   margin-bottom: 20px;
@@ -106,4 +107,32 @@
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
+}
+.small {
+  font-size: 14px;
+}
+
+.medium {
+  font-size: 16px;
+}
+.large {
+  font-size: 18px;
+}
+.extra-large {
+  font-size: 20px;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+.extra-bold {
+  font-weight: 800;
+}
+@media (max-width: 600px) {
+  .chat-box-container {
+    padding: 20px 10px;
+    margin: 0 15px;
+  }
 }

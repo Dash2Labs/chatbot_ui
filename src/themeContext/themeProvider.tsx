@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
+import React, { createContext, useState, useContext, ReactNode } from "react";
 import { defaultThemes } from "./defaultTheme";
 import { ThemeMode, FontSize, Contrast } from "./accessibilityTypes";
 
@@ -27,15 +27,18 @@ const ThemeContext = createContext<ThemeContextType>({
   setContrast: () => {},
 });
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  customThemes,
+}) => {
   const [theme, setTheme] = useState<ThemeMode>("light");
-  const [fontSize, setFontSize] = useState<FontSize>("medium");
+  const [fontSize, setFontSize] = useState<FontSize>("small");
   const [contrast, setContrast] = useState<Contrast>("semi-bold");
-
 
   const mergedThemes = {
     ...defaultThemes,
-// Override defaults with custom themes
+    ...customThemes,
+    // Override defaults with custom themes
   };
 
   return (
@@ -50,45 +53,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         setContrast,
       }}
     >
-      <div
-        style={{
-          ...mergedThemes[theme],
-          fontSize: mapFontSizeToCSS(fontSize),
-          fontWeight: mapContrastToCSS(contrast),
-        }}
-      >
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 };
 
 export const useTheme = () => useContext(ThemeContext);
-
-const mapFontSizeToCSS = (fontSize: FontSize): string => {
-  switch (fontSize) {
-    case "small":
-      return "12px";
-    case "medium":
-      return "16px";
-    case "large":
-      return "20px";
-    case "extra-large":
-      return "24px";
-    default:
-      return "16px";
-  }
-};
-
-const mapContrastToCSS = (contrast: Contrast): string => {
-  switch (contrast) {
-    case "bold":
-      return "700";
-    case "semi-bold":
-      return "600";
-    case "extra-bold":
-      return "800";
-    default:
-      return "600";
-  }
-};

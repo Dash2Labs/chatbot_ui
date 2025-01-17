@@ -1,13 +1,13 @@
 import React from "react";
-import { useTheme } from "../../themeContext/themeProvider"; 
+import { useTheme } from "../../themeContext/themeProvider";
 import "./historyCard.css";
 
 interface HistoryCardProps {
-  title: string; 
-  timeStamps: string | Date; 
-  isActive: boolean; 
-  isSelected: boolean; 
-  onClick?: () => void; 
+  title: string;
+  timeStamps: string | Date;
+  isActive: boolean;
+  isSelected: boolean;
+  onClick?: () => void;
 }
 
 const HistoryCard: React.FC<HistoryCardProps> = ({
@@ -17,32 +17,32 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
   isSelected,
   onClick,
 }) => {
-  const { theme, themes } = useTheme(); 
-
+  const { theme, themes, fontSize, contrast } = useTheme();
 
   const currentTheme = themes[theme] || themes.light;
 
   return (
     <div
-      className={`history-card-container ${isSelected ? "selected" : ""}`}
-      onClick={onClick} 
+      className={`history-card-container ${
+        isSelected ? "selected" : ""
+      } ${fontSize}`}
+      onClick={onClick}
       style={{
         backgroundColor: currentTheme?.hc_bg_color,
-        borderColor: isSelected ?  currentTheme?.hc_border :"", 
+        borderColor: isSelected ? currentTheme?.hc_border : "",
         color: currentTheme?.hc_primary_font_color,
       }}
     >
       <h3
-        className="history-card-title"
+        className={`history-card-title ${fontSize} ${contrast}`}
         style={{
           color: currentTheme?.hc_primary_font_color,
-          fontSize: "var(--font-size)", 
         }}
       >
         {title}
       </h3>
       <div
-        className="history-card-timeStamps"
+        className={`history-card-timeStamps ${fontSize} ${contrast}`}
         style={{ color: currentTheme?.hc_secondary_font_color }}
       >
         <p>
@@ -52,7 +52,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
         </p>
         {isActive && (
           <span
-            className="history-card-active"
+            className={`history-card-active  ${fontSize} ${contrast}`}
             style={{
               backgroundColor: currentTheme?.hc_active_bg_color,
               color: currentTheme?.hc_active_color,

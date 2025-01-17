@@ -1,39 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import "./accessibilityPage.css";
 import accessibilityIcon from "../../assets/selectedIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
+import { FontSize, Contrast } from "../../themeContext/accessibilityTypes";
 
 const Accessibility: React.FC = () => {
-  const [selectedFontSize, setSelectedFontSize] = useState("14px");
-  const [selectedContrast, setSelectedContrast] = useState("semi-bold");
+  const { theme, themes, setFontSize, fontSize, contrast, setContrast } =
+    useTheme();
 
-  const fontSizes = [
-    { size: "14px", label: "font-container-14" },
-    { size: "16px", label: "font-container-16" },
-    { size: "18px", label: "font-container-18" },
-    { size: "20px", label: "font-container-20" },
+  const fontSizes: { size: string; label: string; name: FontSize }[] = [
+    { size: "14px", label: "font-container-14", name: "small" },
+    { size: "16px", label: "font-container-16", name: "medium" },
+    { size: "18px", label: "font-container-18", name: "large" },
+    { size: "20px", label: "font-container-20", name: "extra-large" },
   ];
 
-  const contrasts = [
+  const contrasts: { contrast: Contrast; label: String }[] = [
     { contrast: "semi-bold", label: "contrast-semibold" },
     { contrast: "bold", label: "contrast-bold" },
     { contrast: "extra-bold", label: "contrast-extrabold" },
   ];
 
-  const handleFontSizeSelect = (size: string) => {
-    setSelectedFontSize(size);
+  const handleFontSizeSelect = (name: FontSize) => {
+    setFontSize(name);
   };
 
-  const handleContrastSelect = (contrast: string) => {
-    setSelectedContrast(contrast);
+  const handleContrastSelect = (contrast: Contrast) => {
+    setContrast(contrast);
   };
-  const { theme, themes } = useTheme();
 
   const currentTheme = themes[theme] || themes.light;
   return (
     <>
       <p
-        className="page-title"
+        className={`page-title ${fontSize} ${contrast}`}
         style={{
           color: currentTheme?.primary_font_color,
         }}
@@ -52,13 +52,13 @@ const Accessibility: React.FC = () => {
           <div
             key={font.size}
             className={`font-container ${font.label} ${
-              selectedFontSize === font.size ? "selected-setting" : ""
+              fontSize === font?.name ? "selected-setting" : ""
             }`}
-            onClick={() => handleFontSizeSelect(font.size)}
+            onClick={() => handleFontSizeSelect(font?.name)}
             style={{ borderColor: currentTheme?.cb_input_border_color }}
           >
             <p>I can read this font size comfortably.</p>
-            {selectedFontSize === font.size && (
+            {fontSize === font?.name && (
               <div className="selected">
                 <img src={accessibilityIcon} alt="selected" />
               </div>
@@ -68,17 +68,17 @@ const Accessibility: React.FC = () => {
 
         {/* Contrast Section */}
         <div className="contrast-wrapper">
-          {contrasts.map((contrast) => (
+          {contrasts.map((item) => (
             <div
-              key={contrast.contrast}
-              className={`contrast-container ${contrast.label} ${
-                selectedContrast === contrast.contrast ? "selected-setting" : ""
+              key={item.contrast}
+              className={`contrast-container ${item.label} ${
+                contrast === item.contrast ? "selected-setting" : ""
               }`}
-              onClick={() => handleContrastSelect(contrast.contrast)}
+              onClick={() => handleContrastSelect(item.contrast)}
               style={{ borderColor: currentTheme?.cb_input_border_color }}
             >
               <div className="selected-wrapper">
-                {selectedContrast === contrast.contrast && (
+                {contrast === item.contrast && (
                   <div className="selected">
                     <img src={accessibilityIcon} alt="selected" />
                   </div>

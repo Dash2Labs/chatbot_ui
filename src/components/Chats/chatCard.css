@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
 :root {
   --cc_bg_color: #fff;
   --cc_border: 1px solid #e0e0e0;
@@ -5,6 +7,7 @@
   --cc_secondary_font_color: #acacac;
   --primary_color: #e31837;
 }
+
 .feedback-modal {
   position: fixed;
   top: 50%;
@@ -184,11 +187,9 @@
 .feedback-section {
   display: flex;
   padding-left: 30px;
-  /* align-items: center; */
-  /* justify-content: space-between; */
 }
 .feedback-section label {
-  font-size: 10px;
+  /* font-size: 10px; */
   margin-right: 10px;
 }
 .chat {
@@ -254,4 +255,31 @@
   border-left-color: transparent;
   border-bottom-color: transparent;
   filter: drop-shadow(-2px 2px 2px #00000014);
+}
+.small {
+  font-size: 14px;
+}
+
+.medium {
+  font-size: 16px;
+}
+.large {
+  font-size: 18px;
+}
+.extra-large {
+  font-size: 20px;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+.extra-bold {
+  font-weight: 800;
+}
+@media (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+  }
 }

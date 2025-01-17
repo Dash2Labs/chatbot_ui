@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
 .switch-container {
   display: flex;
   align-items: center;
@@ -72,4 +74,35 @@ input:disabled + .slider {
 .switch-label.disabled-label {
   color: #a9a9a9;
   cursor: not-allowed;
+}
+.small {
+  font-size: 14px;
+}
+
+.medium {
+  font-size: 16px;
+}
+.large {
+  font-size: 18px;
+}
+.extra-large {
+  font-size: 20px;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+.extra-bold {
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .switch-label {
+    display: none;
+  }
+  .switch-container {
+    margin-right: 10px;
+  }
 }

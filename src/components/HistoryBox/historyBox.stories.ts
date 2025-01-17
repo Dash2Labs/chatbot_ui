@@ -17,7 +17,7 @@ export const Default: Story = {
   args: {
     history: [
       {
-        title: "Chat with Alice",
+        title: " Chat with Alice Chat with Alice Chat with Alice",
         timeStamps: new Date().toLocaleString(),
         isActive: true,
       },
@@ -36,8 +36,7 @@ export const Default: Story = {
       alert(
         `Card Details:\nTitle: ${cardDetails.title}\nTimestamp: ${cardDetails.timeStamps}\nActive: ${cardDetails.isActive}`
       ),
-    onSearchChange: (term) =>
-      console.log(`Search term updated: ${term}`),
+    onSearchChange: (term) => console.log(`Search term updated: ${term}`),
     onCreateNewChat: () => alert("New chat created!"),
   },
 };
@@ -61,8 +60,7 @@ export const WithSearch: Story = {
         isActive: true,
       },
     ],
-    onCardClick: (cardDetails) =>
-      console.log("Selected card:", cardDetails),
+    onCardClick: (cardDetails) => console.log("Selected card:", cardDetails),
     onSearchChange: (term) =>
       console.log(`Filtering with search term: ${term}`),
     onCreateNewChat: () => alert("Triggered creation of a new chat."),
