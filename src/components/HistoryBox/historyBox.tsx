@@ -21,7 +21,9 @@ interface HistoryBoxProps {
   isCollapsed?: boolean;
   setIsCollapsed?: (isCollapsed: boolean) => void;
   accessibilityOpen?: boolean;
-  setAccessibilityOpen: (accessibilityOpen: boolean) => void;
+  setAccessibilityOpen?: (accessibilityOpen: boolean) => void;
+  isMobile?: boolean;
+  setIsChatOpen?: (isOpen: boolean) => void;
 }
 
 const HistoryBox: React.FC<HistoryBoxProps> = ({
@@ -32,18 +34,23 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
   isCollapsed,
   accessibilityOpen,
   setAccessibilityOpen,
+  isMobile = false,
+  setIsChatOpen,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null
   );
 
-  const { theme, themes } = useTheme();
+  const { theme, themes, fontSize, contrast } = useTheme();
 
   const currentTheme = themes[theme] || themes.light;
 
   const handleCardClick = (cardDetails: HistoryItem, index: number) => {
     setSelectedCardIndex(index);
+    if (isMobile) {
+      setIsChatOpen && setIsChatOpen(true);
+    }
     if (onCardClick) onCardClick(cardDetails);
   };
 
@@ -81,14 +88,14 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
   );
   return (
     <div
-      className={`sidebar ${isCollapsed ? "collapsed" : ""}`}
+      className={`sidebar ${isCollapsed ? "collapsed" : ""} `}
       style={{
         backgroundColor: currentTheme?.hb_bg_color,
         color: currentTheme?.hc_primary_font_color,
       }}
     >
       <div
-        className={`history-box-container ${theme}-theme`}
+        className={`history-box-container ${theme}-theme ${fontSize}`}
         style={{
           color: currentTheme?.hc_primary_font_color,
           borderColor: currentTheme?.hb_border,
@@ -97,10 +104,19 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
         {!isCollapsed ? (
           <>
             <img className="logo-icon" src={logo} alt="Logo" />
+            <div className="new-chat-btn">
+              <button
+                className={`${fontSize}`}
+                style={{ color: currentTheme?.primary_color }}
+              >
+                <PlusIcon />{" "}
+                <span style={{ marginLeft: "10px" }}>Start a new chat</span>
+              </button>
+            </div>
             <div className="history-box-search">
               <input
                 type="text"
-                className="history-box-input"
+                className={`history-box-input ${fontSize} ${contrast}`}
                 placeholder="Search"
                 value={searchTerm}
                 onChange={(e) => handleSearchTermChange(e.target.value)}
@@ -110,7 +126,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
               </button>
             </div>
 
-            <div className="history-box-cards">
+            <div className={`history-box-cards ${fontSize}`}>
               {history.map((item, index) => (
                 <HistoryCard
                   key={index}
@@ -146,13 +162,15 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
             </div>
           </div>
         )}
-        <AccessibilityButton
-          isCollapsed={isCollapsed}
-          onAccessibilityClick={() => {
-            setAccessibilityOpen(!accessibilityOpen);
-          }}
-          className="collapsed-accessibility"
-        />
+        {!isMobile && (
+          <AccessibilityButton
+            isCollapsed={isCollapsed}
+            onAccessibilityClick={() => {
+              setAccessibilityOpen && setAccessibilityOpen(!accessibilityOpen);
+            }}
+            className="collapsed-accessibility"
+          />
+        )}
       </div>
     </div>
   );

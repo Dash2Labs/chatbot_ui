@@ -18,13 +18,13 @@ const SwitchToggle: FC<SwitchProps> = ({
       onChange(!checked);
     }
   };
-  const { theme, themes } = useTheme();
+  const { theme, themes, fontSize, contrast } = useTheme();
   const currentTheme = themes[theme] || themes.light;
   return (
     <div className="switch-container">
       {label && (
         <span
-          className="switch-label"
+          className={`switch-label ${fontSize} ${contrast}`}
           style={{
             color: currentTheme?.font_color,
           }}

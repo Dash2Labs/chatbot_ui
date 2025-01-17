@@ -4,9 +4,9 @@ import { useTheme } from "../../themeContext/themeProvider";
 
 export interface AccessibilityButtonProps {
   icon?: React.ReactNode;
-  title?: string; 
-  description?: string; 
-  onAccessibilityClick?: () => void; 
+  title?: string;
+  description?: string;
+  onAccessibilityClick?: () => void;
   className?: string;
   isCollapsed?: boolean;
 }
@@ -19,7 +19,7 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
   className = "",
   isCollapsed,
 }) => {
-  const { theme, themes } = useTheme();
+  const { theme, themes, fontSize, contrast } = useTheme();
 
   const currentTheme = themes[theme] || themes.light;
 
@@ -53,8 +53,8 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
       {icon || <AccessibilityIcon />}
       {!isCollapsed && (
         <div>
-          <p>{title}</p>
-          <p>{description}</p>
+          <p className={`${fontSize} ${contrast}`}>{title}</p>
+          <p className={`${fontSize} ${contrast}`}>{description}</p>
         </div>
       )}
     </div>

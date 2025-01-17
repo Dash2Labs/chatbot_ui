@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
 .profile {
   box-shadow: 0px 3px 6px #00000014;
   width: 40px;
@@ -8,7 +10,7 @@
   align-items: center;
   color: #e31837;
 }
-.headers {
+.web-header {
   font-family: "Montserrat", serif;
   display: flex;
   justify-content: flex-end;
@@ -19,4 +21,28 @@
 .user-name {
   margin-right: 20px;
   font-size: 14px;
+}
+.collapsed-accessibility {
+  display: none;
+  box-shadow: none;
+  position: static;
+}
+.light-icon,
+.dark-icon,
+.cancel-icon {
+  display: none;
+}
+@media (max-width: 600px) {
+  .user-name {
+    display: none;
+  }
+  .collapsed-accessibility {
+    display: block;
+    height: 40px;
+  }
+  .light-icon,
+  .dark-icon,
+  .cancel-icon {
+    display: block;
+  }
 }

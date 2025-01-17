@@ -9,5 +9,8 @@ export interface ChatCardProps {
   isProfileImageRequired?: boolean; // Optional: Toggle profile image visibility
   feedback?: string; // Submitted feedback text
   rating?: number ; // Submitted star rating (1-5 stars)
-  onFeedbackSubmit?: (stars: number, textFeedback?: string) => void; // Callback for feedback submission
+  chatId?: string; // Unique chat ID
+  sessionId?: string; // Unique session ID
+  onStarClick?: (star: number, chatId?:string, sessionId?:string) => void; // Callback for feedback submission
+  onTextFeedbackSubmit?: (feedback: string, chatId?:string, sessionId?:string) => void; // Callback for text feedback submission
 }
