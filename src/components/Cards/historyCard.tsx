@@ -16,7 +16,8 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
   timeStamps,
   isActive,
   isSelected,
-  onClick
+  onClick,
+  sessionId,
 }) => {
   const { theme, themes, fontSize, contrast } = useTheme();
 
