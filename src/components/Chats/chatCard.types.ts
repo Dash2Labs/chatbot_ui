@@ -13,4 +13,8 @@ export interface ChatCardProps {
   sessionId?: string; // Unique session ID
   onStarClick?: (star: number, chatId?:string, sessionId?:string) => void; // Callback for feedback submission
   onTextFeedbackSubmit?: (feedback: string, chatId?:string, sessionId?:string) => void; // Callback for text feedback submission
+  userName?: string;
+  userProfileImage?: string;
+  aiName?: string;
+  aiProfileImage?: string;
 }

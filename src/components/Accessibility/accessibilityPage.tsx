@@ -1,6 +1,5 @@
 import React from "react";
 import "./accessibilityPage.css";
-import accessibilityIcon from "../../assets/selectedIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
 import { FontSize, Contrast } from "../../themeContext/accessibilityTypes";
 
@@ -30,6 +29,23 @@ const Accessibility: React.FC = () => {
   };
 
   const currentTheme = themes[theme] || themes.light;
+  const SelectedIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="11"
+      viewBox="0 0 15 11"
+    >
+      <path
+        id="Path_6229"
+        data-name="Path 6229"
+        d="M13.614,21.306h0a1.523,1.523,0,0,1-1.06-.426L8.928,17.359a1.415,1.415,0,0,1,0-2.049,1.533,1.533,0,0,1,2.118,0l2.567,2.492,7.317-7.075a1.535,1.535,0,0,1,2.119,0,1.417,1.417,0,0,1,0,2.049l-8.378,8.1A1.531,1.531,0,0,1,13.614,21.306Z"
+        transform="translate(-8.491 -10.307)"
+        fill="#fff"
+        style={{ fill: currentTheme?.btn_icon_color }}
+      />
+    </svg>
+  );
   return (
     <>
       <p
@@ -60,7 +76,7 @@ const Accessibility: React.FC = () => {
             <p>I can read this font size comfortably.</p>
             {fontSize === font?.name && (
               <div className="selected">
-                <img src={accessibilityIcon} alt="selected" />
+                <SelectedIcon />
               </div>
             )}
           </div>
@@ -80,7 +96,7 @@ const Accessibility: React.FC = () => {
               <div className="selected-wrapper">
                 {contrast === item.contrast && (
                   <div className="selected">
-                    <img src={accessibilityIcon} alt="selected" />
+                    <SelectedIcon />
                   </div>
                 )}
               </div>

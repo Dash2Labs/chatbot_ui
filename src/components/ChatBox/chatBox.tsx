@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import ChatCard from "../Chats";
 import { ChatCardProps } from "../Chats/chatCard.types";
 import "./chatBox.css";
-import send from "../../assets/send.svg";
-import upload from "../../assets/upload.svg";
 import { useTheme } from "../../themeContext/themeProvider";
 
 interface ChatBoxProps {
@@ -20,19 +18,14 @@ interface ChatBoxProps {
     sessionId?: string
   ) => void; 
   sessionId?: string;
+  userName?: string;
+  userProfileImage?: string;
+  aiName?: string;
+  aiProfileImage?: string;
+  isProfileImageRequired?: boolean;
 }
 
-const ChatBox: React.FC<ChatBoxProps> = ({
-  chats,
-  onChatScroll,
-  onChatScrollTop,
-  onChatScrollBottom,
-  onSubmit,
-  onFileUpload,
-  onStarClick,
-  onTextFeedbackSubmit,
-  sessionId
-}) => {
+const ChatBox: React.FC<ChatBoxProps> = (props) => {
   const [message, setMessage] = useState<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -42,13 +35,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const container = event.currentTarget;
 
-    if (onChatScroll) onChatScroll(event);
-    if (container.scrollTop === 0 && onChatScrollTop) onChatScrollTop();
+    if (props.onChatScroll) props.onChatScroll(event);
+    if (container.scrollTop === 0 && props.onChatScrollTop) props.onChatScrollTop();
     if (
       container.scrollHeight - container.scrollTop === container.clientHeight &&
-      onChatScrollBottom
+      props.onChatScrollBottom
     )
-      onChatScrollBottom();
+    props.onChatScrollBottom();
   };
 
   const scrollToBottom = () => {
@@ -64,16 +57,49 @@ const ChatBox: React.FC<ChatBoxProps> = ({
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && onFileUpload) onFileUpload(file, sessionId || "");
+    if (file && props.onFileUpload) props.onFileUpload(file, props.sessionId || "");
   };
 
   const handleSubmit = () => {
     if (message.trim()) {
-      onSubmit(message, sessionId || "");
+      props.onSubmit(message, props.sessionId || "");
       setMessage("");
     }
   };
-
+  const SendIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="24.709"
+      viewBox="0 0 25 24.709"
+    >
+      <path
+        id="Path_49"
+        data-name="Path 49"
+        d="M36.065,28.271a.576.576,0,0,0-.827-.795L24.9,36.268l-5.457-2.111a1.328,1.328,0,0,1-.155-2.409L41.947,19.057a1.117,1.117,0,0,1,1.642,1.089L41.6,40.862a1.371,1.371,0,0,1-1.876,1.145l-6.642-2.572-4.169,3.907a1.077,1.077,0,0,1-1.812-.795V39.479Z"
+        transform="translate(-18.594 -18.924)"
+        fill="#fff"
+        style={{ fill: currentTheme?.btn_icon_color }}
+      />
+    </svg>
+  );
+  const UploadIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14.998"
+      height="20"
+      viewBox="0 0 14.998 20"
+    >
+      <path
+        id="Path_57"
+        data-name="Path 57"
+        d="M33.308,13.091,28.9,8.681a1.519,1.519,0,0,0-1.06-.441H26.7a2.5,2.5,0,0,0-4.9,0H20.25a1.5,1.5,0,0,0-1.5,1.5v15a1.5,1.5,0,0,0,1.5,1.5h12a1.5,1.5,0,0,0,1.5-1.5V14.15A1.521,1.521,0,0,0,33.308,13.091Zm-1.27.15h-2.79a.5.5,0,0,1-.5-.5V9.95Zm-7.789-6a1.51,1.51,0,0,1,1.41,1H22.84A1.51,1.51,0,0,1,24.25,7.241Zm8.5,17.5a.51.51,0,0,1-.5.5h-12a.5.5,0,0,1-.5-.5v-15a.5.5,0,0,1,.5-.5h1.5v4.5a2.5,2.5,0,1,0,5,0v-2a1.5,1.5,0,0,0-3,0v2a.5.5,0,0,0,1,0v-2a.5.5,0,1,1,1,0v2a1.5,1.5,0,0,1-3,0v-4.5h5v3.5a1.5,1.5,0,0,0,1.5,1.5h3.5Z"
+        transform="translate(-18.75 -6.238)"
+        fill="#e31837"
+        style={{ fill: currentTheme?.btn_bg_color }}
+      />
+    </svg>
+  );
   return (
     <>
       <p
@@ -99,23 +125,25 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             scrollbarColor: `${currentTheme?.scroll_bar_color} ${currentTheme?.cb_bg_color}`,
           }}
         >
-          {chats.map((chat, index) => (
+          {props.chats && props.chats.map((chat, index) => (
             <ChatCard
               key={index}
               type={chat.type} // ai or user
               text={chat.text} // Chat message
               timestamp={chat.timestamp} // Message timestamp
-              profileImage={chat.profileImage} // Profile image URL (optional)
-              name={chat.name} // Name of the user (optional)
+              userProfileImage={props.userProfileImage} // Profile image URL (optional)
+              userName={props.userName} // Name of the user (optional)
+              aiName={props.aiName} // Name of the AI (optional)
+              aiProfileImage={props.aiProfileImage} // Profile image URL of AI (optional)
               ratingEnabled={chat.ratingEnabled ?? true} // Enable/disable rating (default true)
               textFeedbackEnabled={chat.textFeedbackEnabled ?? true} // Enable/disable text feedback (default true)
-              isProfileImageRequired={chat.isProfileImageRequired ?? false} // Show profile image (default false)
-              onStarClick={onStarClick} // Callback for star click
+              isProfileImageRequired={props.isProfileImageRequired ?? false} // Show profile image (default false)
+              onStarClick={props.onStarClick} // Callback for star click
               feedback={chat.feedback || ""} // Existing feedback text (optional)
               rating={chat.rating || 0} // Existing rating (default 0)
               chatId={chat.chatId || ""} // Chat ID for reference
-              sessionId={chat.sessionId || ""} // Session ID for reference
-              onTextFeedbackSubmit={onTextFeedbackSubmit} // Callback for text feedback submission
+              sessionId={chat.sessionId || props.sessionId || ""} // Session ID for reference
+              onTextFeedbackSubmit={props.onTextFeedbackSubmit} // Callback for text feedback submission
             />
           ))}
         </div>
@@ -139,7 +167,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({
               id="input-file"
             />
             <label htmlFor="input-file" className="input-file-icon">
-              <img src={upload} alt="Upload" />
+              <UploadIcon />
             </label>
           </div>
           <button
@@ -148,11 +176,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({
             disabled={!message}
             style={{
               backgroundColor: message
-                ? currentTheme?.send_btn_bg
+                ? currentTheme?.btn_bg_color
                 : currentTheme?.cb_disabled_button_bg_color,
             }}
           >
-            <img src={send} alt="Send" />
+            <SendIcon />
           </button>
         </div>
       </div>

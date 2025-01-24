@@ -1,4 +1,3 @@
-
 export interface ChatbotProps {
   history: any;
   chats: any;
@@ -17,6 +16,15 @@ export interface ChatbotProps {
     sessionId?: string
   ) => void;
   sessionId?: string;
+  userName?: string;
+  userProfileImage?: string;
+  aiName?: string;
+  aiProfileImage?: string;
+  isProfileImageRequired?: boolean;
+  fullLogo?: string;
+  compactLogo?: string;
+  onHistoryScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
+  onHistoryScrollTop?: () => void;
+  onHistoryScrollBottom?: () => void;
+  isMobile?: boolean;
 }
-
-

@@ -14,6 +14,11 @@ type Story = StoryObj<typeof ChatBox>;
 export const DefaultChatBox: Story = {
   args: {
     sessionId: "session-123",
+    userName: "John Doe",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
     chats: [
       {
         type: "ai",
@@ -46,6 +51,11 @@ export const DefaultChatBox: Story = {
 export const WithFileUpload: Story = {
   args: {
     sessionId: "session-456",
+    userName: "Jane Doe",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
     chats: [
       {
         type: "ai",
@@ -69,6 +79,11 @@ export const WithFileUpload: Story = {
 export const LongChatHistory: Story = {
   args: {
     sessionId: "session-789",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
     chats: Array.from({ length: 50 }, (_, i) => ({
       type: i % 2 === 0 ? "ai" : "user",
       text: `This is message #${i + 1}`,
@@ -86,6 +101,11 @@ export const LongChatHistory: Story = {
 export const CustomizedHandlers: Story = {
   args: {
     sessionId: "session-999",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
     chats: [
       {
         type: "ai",
@@ -114,6 +134,11 @@ export const CustomizedHandlers: Story = {
 export const FeedbackAndRating: Story = {
   args: {
     sessionId: "session-1122",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
     chats: [
       {
         type: "ai",

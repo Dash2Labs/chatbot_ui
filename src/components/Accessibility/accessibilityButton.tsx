@@ -35,7 +35,7 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
         transform="translate(-5 -5)"
         fill="#242424"
         fillRule="evenodd"
-        style={{ fill: currentTheme?.primary_color }}
+        style={{ fill: currentTheme?.accessibility_icon_color }}
       />
     </svg>
   );
@@ -46,7 +46,7 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
       role="button"
       tabIndex={0}
       style={{
-        backgroundColor: currentTheme?.cc_bg_color,
+        backgroundColor: currentTheme?.accessibility_btn_bg,
         color: currentTheme?.hc_primary_font_color,
       }}
     >

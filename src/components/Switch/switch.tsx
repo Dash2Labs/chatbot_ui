@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { useEffect } from "react";
 import "./switch.css";
 import { useTheme } from "../../themeContext/themeProvider";
 
@@ -8,7 +8,7 @@ interface SwitchProps {
   label?: string;
 }
 
-const SwitchToggle: FC<SwitchProps> = ({
+const SwitchToggle: React.FC<SwitchProps> = ({
   checked = false,
   onChange,
   label,
@@ -20,6 +20,20 @@ const SwitchToggle: FC<SwitchProps> = ({
   };
   const { theme, themes, fontSize, contrast } = useTheme();
   const currentTheme = themes[theme] || themes.light;
+
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `
+      .slider:before {
+        background-color: ${currentTheme?.btn_bg_color};
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style); // Cleanup on unmount
+    };
+  }, [currentTheme]);
+
   return (
     <div className="switch-container">
       {label && (

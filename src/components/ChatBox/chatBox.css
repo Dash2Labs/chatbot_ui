@@ -29,6 +29,7 @@
   margin-bottom: 20px;
   background-color: var(--cb-bg-color);
   padding: 30px 20px 20px 30px;
+  font-family: "Montserrat", serif;
 }
 
 .chat-box-messages {
@@ -107,6 +108,7 @@
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
+  font-family: "Montserrat", serif;
 }
 .small {
   font-size: 14px;
