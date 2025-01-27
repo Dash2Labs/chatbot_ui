@@ -7,29 +7,11 @@ import Accessibility from "../Accessibility/accessibilityPage";
 import { useTheme } from "../../themeContext/themeProvider";
 import { ChatbotProps } from "./chatbotProps";
 
-
-
 export interface MobileChatbotProps extends ChatbotProps {
   isMobile: boolean;
 }
 
-
-const MobileChatbot: React.FC<MobileChatbotProps> = ({
-  history,
-  chats,
-  onChatSubmit,
-  onChatScroll,
-  onChatScrollTop,
-  onChatScrollBottom,
-  onFileUpload,
-  onSearchChange,
-  onCardClick,
-  onCreateNewChat,
-  isMobile,
-  sessionId,
-  onStarClick,
-  onTextFeedbackSubmit,
-}) => {
+const MobileChatbot: React.FC<MobileChatbotProps> = (props) => {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [ischatOpen, setIsChatOpen] = useState(false);
   const { theme, themes } = useTheme();
@@ -47,29 +29,35 @@ const MobileChatbot: React.FC<MobileChatbotProps> = ({
       >
         <div className="toolbar">
           <Header
-            userName="John Doe"
+            userName={props.userName || ""}
             toggleLabel="Enable Dark Theme"
-            isMobile={isMobile}
+            isMobile={props.isMobile}
             isChatOpen={ischatOpen}
             setIsChatOpen={setIsChatOpen}
             accessibilityOpen={accessibilityOpen}
             setAccessibilityOpen={setAccessibilityOpen}
+            compactLogo={props.compactLogo}
           />
         </div>
 
         {!ischatOpen && !accessibilityOpen && (
           <div className="main-pages">
             <HistoryBox
-              history={history}
-              onSearchChange={onSearchChange}
-              onCardClick={onCardClick}
-              onCreateNewChat={onCreateNewChat}
+              history={props.history}
+              onSearchChange={props.onSearchChange}
+              onCardClick={props.onCardClick}
+              onCreateNewChat={props.onCreateNewChat}
               // logo={logo}
               isCollapsed={false}
               accessibilityOpen={accessibilityOpen}
               setAccessibilityOpen={setAccessibilityOpen}
-              isMobile={isMobile}
+              isMobile={props.isMobile}
               setIsChatOpen={setIsChatOpen}
+              onHistoryScroll={props.onHistoryScroll}
+              onHistoryScrollTop={props.onHistoryScrollTop}
+              onHistoryScrollBottom={props.onHistoryScrollBottom}
+              fullLogo={props.fullLogo}
+              compactLogo={props.compactLogo}
             />
           </div>
         )}
@@ -77,15 +65,20 @@ const MobileChatbot: React.FC<MobileChatbotProps> = ({
         {ischatOpen && !accessibilityOpen && (
           <div className="main-pages">
             <ChatBox
-              chats={chats}
-              onSubmit={onChatSubmit}
-              onChatScroll={onChatScroll}
-              onChatScrollBottom={onChatScrollBottom}
-              onChatScrollTop={onChatScrollTop}
-              onFileUpload={onFileUpload}
-              sessionId={sessionId}
-              onStarClick={onStarClick}
-              onTextFeedbackSubmit={onTextFeedbackSubmit}
+              chats={props.chats}
+              onSubmit={props.onChatSubmit}
+              onChatScroll={props.onChatScroll}
+              onChatScrollBottom={props.onChatScrollBottom}
+              onChatScrollTop={props.onChatScrollTop}
+              onFileUpload={props.onFileUpload}
+              sessionId={props.sessionId}
+              onStarClick={props.onStarClick}
+              onTextFeedbackSubmit={props.onTextFeedbackSubmit}
+              userName={props.userName}
+              userProfileImage={props.userProfileImage}
+              aiName={props.aiName}
+              aiProfileImage={props.aiProfileImage}
+              isProfileImageRequired={props.isProfileImageRequired}
             />
           </div>
         )}

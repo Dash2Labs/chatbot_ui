@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { ChatCardProps } from "./chatCard.types";
 import "./chatCard.css";
-import feedbackIcon from "../../assets/feedbackIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
 
 const ChatCard: React.FC<ChatCardProps> = ({
   type,
   text,
   timestamp,
-  profileImage,
-  name,
   ratingEnabled = true,
   textFeedbackEnabled = true,
   isProfileImageRequired = false,
@@ -18,32 +15,32 @@ const ChatCard: React.FC<ChatCardProps> = ({
   rating = 0,
   chatId = "",
   sessionId = "",
-  onTextFeedbackSubmit
+  onTextFeedbackSubmit,
+  userName,
+  userProfileImage,
+  aiName,
+  aiProfileImage,
 }) => {
   const [selectedStars, setSelectedStars] = useState<number>(rating);
   const [textFeedback, setTextFeedback] = useState<string>(feedback);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const getInitials = () => {
-    if (name) {
-      return `${name[0]}`.toUpperCase();
-    }
-    return "?";
+      if(type === "ai"){
+        return `${aiName?.[0] ?? ""}`.toUpperCase();
+      }else{
+        return `${userName?.[0] ?? ""}`.toUpperCase();
+      }
   };
 
-  // const handleStarClick = (stars: number, chatId:string, sessionId:string) => {
-  //   setSelectedStars(stars);
-  //   if (onFeedbackSubmit) {
-  //     onFeedbackSubmit(stars, textFeedback);
-  //   }
-  // };
+  const getProfileImage = () =>{
+    if(type === "ai"){
+      return aiProfileImage;
+    }else{
+      return userProfileImage;
+    }
+  }
 
-  // const handleTextFeedbackSubmit = () => {
-  //   if (onFeedbackSubmit) {
-  //     onFeedbackSubmit(selectedStars, textFeedback);
-  //   }
-  //   setIsModalOpen(false);
-  // };
   const { theme, themes, fontSize, contrast } = useTheme();
   const currentTheme = themes[theme] || themes.light;
   const CancelIcon = () => (
@@ -70,8 +67,8 @@ const ChatCard: React.FC<ChatCardProps> = ({
     >
       {isProfileImageRequired && (
         <div className="profile-wrapper">
-          {profileImage ? (
-            <img src={profileImage} alt="Profile" className="profile-image" />
+          {getProfileImage() ? (
+            <img src={getProfileImage()} alt="Profile" className="profile-image" />
           ) : (
             <div className={`profile-initials ${fontSize} ${contrast}`}>
               {getInitials()}
@@ -141,7 +138,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
                             d="M14.244,10.438a.746.746,0,0,0-.411-1.229l-2.4-.522a.53.53,0,0,1-.343-.254L9.858,6.314a0,0,0,0,0,0,0,.758.758,0,0,0-1.3,0L7.329,8.431a.522.522,0,0,1-.342.254l-2.4.524a.745.745,0,0,0-.407,1.231l1.636,1.836a.514.514,0,0,1,.133.4L5.707,15.11a.749.749,0,0,0,.739.839.774.774,0,0,0,.305-.065l2.254-.993a.461.461,0,0,1,.417,0l2.252.992a.746.746,0,0,0,1.043-.771l-.241-2.437a.512.512,0,0,1,.133-.4Z"
                             transform="translate(-3.987 -5.949)"
                             style={{
-                              fill: currentTheme?.theme_color,
+                              fill: currentTheme?.btn_bg_color,
                             }}
                           />
                         </svg>
@@ -159,7 +156,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
                             d="M9.21,5.449a1.246,1.246,0,0,1,.886.363h.261v.366l1.166,2a.031.031,0,0,0,.022.018l2.4.523a1.265,1.265,0,0,1,.923.822l.006.017a1.266,1.266,0,0,1-.25,1.2l-.008.009-1.635,1.838-.008.01s0,.006,0,.016l.24,2.426a1.233,1.233,0,0,1-.486,1.134l-.018.014a1.24,1.24,0,0,1-1.237.133l-2.261-1-.005,0-2.254.993a1.275,1.275,0,0,1-.507.107,1.245,1.245,0,0,1-.728-.238L5.7,16.2a1.238,1.238,0,0,1-.491-1.14l.24-2.425a.076.076,0,0,0,0-.016l-.006-.007L3.8,10.764a1.264,1.264,0,0,1-.254-1.2l.006-.017a1.267,1.267,0,0,1,.923-.825l.007,0,2.4-.524s.007,0,.016-.016L8.134,6.055A1.247,1.247,0,0,1,9.21,5.449ZM9.445,6.6l-.017-.029a.239.239,0,0,0-.218-.12.242.242,0,0,0-.218.12L7.761,8.683a1.021,1.021,0,0,1-.664.49L4.7,9.7a.262.262,0,0,0-.2.175.267.267,0,0,0,.061.242l1.632,1.831a1.015,1.015,0,0,1,.259.761v.016L6.2,15.165a.248.248,0,0,0,.35.26l2.247-.99a.964.964,0,0,1,.831,0l2.243.988a.241.241,0,0,0,.244-.024.238.238,0,0,0,.1-.234v-.006l-.242-2.449a1.014,1.014,0,0,1,.26-.771l1.627-1.83a.268.268,0,0,0,.058-.244.264.264,0,0,0-.2-.172l-2.4-.523a1.031,1.031,0,0,1-.661-.488Z"
                             transform="translate(-3.487 -5.449)"
                             style={{
-                              fill: currentTheme?.theme_color,
+                              fill: currentTheme?.btn_bg_color,
                             }}
                           />
                         </svg>
@@ -177,7 +174,22 @@ const ChatCard: React.FC<ChatCardProps> = ({
               onClick={() => setIsModalOpen(true)}
             >
               {/* 📝 */}
-              <img src={feedbackIcon} />
+              {/* <img src={feedbackIcon} /> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="23.455"
+                height="16.707"
+                viewBox="0 0 23.455 16.707"
+              >
+                <path
+                  id="Path_6226_-_Outline"
+                  data-name="Path 6226 - Outline"
+                  d="M5.609,17.769h16.23a3.617,3.617,0,0,1,3.616,3.609v4.877a3.619,3.619,0,0,1-3.616,3.616H10.49L5.885,34.476V29.871H5.609A3.617,3.617,0,0,1,2,26.255V21.378A3.613,3.613,0,0,1,5.609,17.769Zm16.23,11.1a2.619,2.619,0,0,0,2.616-2.616V21.378a2.615,2.615,0,0,0-2.616-2.609H5.609A2.612,2.612,0,0,0,3,21.378v4.877a2.615,2.615,0,0,0,2.609,2.616H6.885v3.191l3.191-3.191Z"
+                  transform="translate(-2 -17.769)"
+                  fill="#e31837"
+                  style={{ fill: currentTheme?.btn_bg_color }}
+                />
+              </svg>
             </button>
           )}
         </div>

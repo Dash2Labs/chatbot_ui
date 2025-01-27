@@ -8,6 +8,7 @@ interface HistoryCardProps {
   isActive: boolean;
   isSelected: boolean;
   onClick?: () => void;
+  sessionId?: string;
 }
 
 const HistoryCard: React.FC<HistoryCardProps> = ({
@@ -16,6 +17,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
   isActive,
   isSelected,
   onClick,
+  sessionId,
 }) => {
   const { theme, themes, fontSize, contrast } = useTheme();
 

@@ -18,6 +18,7 @@ export const Default: Story = {
     timeStamps: "2024-11-18 10:00 AM",
     isActive: false,
     isSelected: false,
+    sessionId: "1234567890",
   },
 };
 
@@ -27,6 +28,7 @@ export const ActiveChat: Story = {
     timeStamps: "2024-11-18 10:30 AM",
     isActive: true,
     isSelected: false,
+    sessionId: "1234567890",
   },
 };
 
@@ -36,6 +38,7 @@ export const SelectedChat: Story = {
     timeStamps: "2024-11-18 11:00 AM",
     isActive: false,
     isSelected: true,
+    sessionId: "1234567890",
   },
 };
 
@@ -45,6 +48,7 @@ export const ActiveAndSelectedChat: Story = {
     timeStamps: "2024-11-18 11:30 AM",
     isActive: true,
     isSelected: true,
+    sessionId: "1234567890",
   },
 };
 
@@ -55,5 +59,6 @@ export const WithOnClick: Story = {
     isActive: false,
     isSelected: false,
     onClick: () => alert("HistoryCard clicked!"), // Example click handler
+    sessionId: "1234567890",
   },
 };

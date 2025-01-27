@@ -1,10 +1,12 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import ChatbotSuite from "./ChatbotSuite";
+import FullChatbot from "./fullChatbot";
+import logo from "../../assets/Dash2Logo.png";
+import collapsedLogo from "../../assets/collapsedLogo.png";
 
-const meta: Meta<typeof ChatbotSuite> = {
-  title: "FullChatbot/ChatbotSuite",
-  component: ChatbotSuite,
+const meta: Meta<typeof FullChatbot> = {
+  title: "FullChatbot/Chatbot",
+  component: FullChatbot,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
@@ -13,7 +15,7 @@ const meta: Meta<typeof ChatbotSuite> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ChatbotSuite>;
+type Story = StoryObj<typeof FullChatbot>;
 
 export const Default: Story = {
   args: {
@@ -22,11 +24,13 @@ export const Default: Story = {
         title: "Chat with Alice",
         timeStamps: new Date().toLocaleString(),
         isActive: true,
+        sessionId: "1234567890",
       },
       {
         title: "Project Discussion",
         timeStamps: "2023-11-15 10:30 AM",
         isActive: false,
+        sessionId: "1234567890",
       },
     ],
     chats: [
@@ -56,11 +60,22 @@ export const Default: Story = {
       },
     ],
     sessionId: "session-123",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
+    fullLogo: logo,
+    compactLogo: collapsedLogo,
     onChatSubmit: (message: string, sessionId?: string) =>
       alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
     onChatScroll: () => console.log("Scrolled through chat"),
     onChatScrollTop: () => console.log("Scrolled to top"),
     onChatScrollBottom: () => console.log("Scrolled to bottom"),
+    onHistoryScroll: (event) =>
+      console.log(`History Scroll: ScrollTop is ${event.currentTarget.scrollTop}`),
+    onHistoryScrollTop: () => alert("History scrolled to top"),
+    onHistoryScrollBottom: () => alert("History scrolled to bottom"),
     onSearchChange: (term: string) => console.log(`Search term: ${term}`),
     onCardClick: (cardDetails) =>
       alert(`Card clicked:\n${JSON.stringify(cardDetails, null, 2)}`),
@@ -85,8 +100,8 @@ export const Default: Story = {
 export const LongChatHistory: Story = {
   args: {
     history: [
-      { title: "Chat 1", timeStamps: "2023-11-10 09:00 AM", isActive: false },
-      { title: "Chat 2", timeStamps: "2023-11-11 11:00 AM", isActive: true },
+      { title: "Chat 1", timeStamps: "2023-11-10 09:00 AM", isActive: false, sessionId: "1234567890", },
+      { title: "Chat 2", timeStamps: "2023-11-11 11:00 AM", isActive: true, sessionId: "1234567890", },
     ],
     chats: Array.from({ length: 50 }, (_, i) => ({
       type: i % 2 === 0 ? "ai" : "user",
@@ -96,17 +111,28 @@ export const LongChatHistory: Story = {
       sessionId: "session-456",
     })),
     sessionId: "session-456",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
+    fullLogo: "https://via.placeholder.com/150",
+    compactLogo: "https://via.placeholder.com/50",
     onChatSubmit: (message: string, sessionId?: string) =>
       alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
     onChatScrollTop: () => console.log("Scrolled to top"),
     onChatScrollBottom: () => console.log("Scrolled to bottom"),
+    onHistoryScroll: (event) =>
+      console.log(`History Scroll: ScrollTop is ${event.currentTarget.scrollTop}`),
+    onHistoryScrollTop: () => alert("History scrolled to top"),
+    onHistoryScrollBottom: () => alert("History scrolled to bottom"),
   },
 };
 
 export const FeedbackAndRatingEnabled: Story = {
   args: {
     history: [
-      { title: "Customer Support", timeStamps: "2023-11-12 03:00 PM", isActive: true },
+      { title: "Customer Support", timeStamps: "2023-11-12 03:00 PM", isActive: true, sessionId: "1234567890", },
     ],
     chats: [
       {
@@ -127,6 +153,13 @@ export const FeedbackAndRatingEnabled: Story = {
       },
     ],
     sessionId: "session-789",
+    userName: "User",
+    userProfileImage: "https://via.placeholder.com/40",
+    aiName: "AI",
+    aiProfileImage: "https://via.placeholder.com/40",
+    isProfileImageRequired: true,
+    fullLogo: "https://via.placeholder.com/150",
+    compactLogo: "https://via.placeholder.com/50",
     onChatSubmit: (message: string, sessionId?: string) =>
       alert(`Message submitted:\nMessage: ${message}\nSession ID: ${sessionId}`),
     onStarClick: (star: number, chatId?: string, sessionId?: string) =>
@@ -141,5 +174,9 @@ export const FeedbackAndRatingEnabled: Story = {
       alert(
         `Feedback submitted:\nFeedback: ${feedback}\nChat ID: ${chatId}\nSession ID: ${sessionId}`
       ),
+    onHistoryScroll: (event) =>
+      console.log(`History Scroll: ScrollTop is ${event.currentTarget.scrollTop}`),
+    onHistoryScrollTop: () => alert("History scrolled to top"),
+    onHistoryScrollBottom: () => alert("History scrolled to bottom"),
   },
 };

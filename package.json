@@ -11,8 +11,7 @@
     "dev": "rollup -c --watch",
     "build": "rollup -c",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_2f42b99d0df4793"
+    "build-storybook": "storybook build"
   },
   "babel": {
     "sourceType": "unambiguous",
@@ -46,7 +45,6 @@
     "@babel/preset-env": "^7.24.6",
     "@babel/preset-react": "^7.24.6",
     "@babel/preset-typescript": "^7.24.6",
-    "@chromatic-com/storybook": "1.5.0",
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -63,7 +61,6 @@
     "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "@types/styled-components": "^5.1.34",
     "chromatic": "^11.20.2",
     "postcss": "^8.4.38",
     "rollup": "^4.18.0",
@@ -75,17 +72,13 @@
   },
   "peerDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "styled-components": "^6.0.0"
+    "react-dom": "^18.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
       "optional": false
     },
     "react-dom": {
-      "optional": false
-    },
-    "styled-components": {
       "optional": false
     }
   },

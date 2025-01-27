@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import HistoryCard from "../Cards";
 import "./historyBox.css";
-import logo from "../../assets/Dash2Logo.png";
 import AccessibilityButton from "../Accessibility/accessibilityButton";
-import collapsedLogo from "../../assets/collapsedLogo.png";
 import messageIcon from "../../assets/messageIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
 
@@ -11,6 +9,7 @@ interface HistoryItem {
   title: string;
   timeStamps: string | Date;
   isActive: boolean;
+  sessionId: string;
 }
 
 interface HistoryBoxProps {
@@ -24,6 +23,11 @@ interface HistoryBoxProps {
   setAccessibilityOpen?: (accessibilityOpen: boolean) => void;
   isMobile?: boolean;
   setIsChatOpen?: (isOpen: boolean) => void;
+  fullLogo?: string;
+  compactLogo?: string;
+  onHistoryScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
+  onHistoryScrollTop?: () => void;
+  onHistoryScrollBottom?: () => void;
 }
 
 const HistoryBox: React.FC<HistoryBoxProps> = ({
@@ -36,11 +40,17 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
   setAccessibilityOpen,
   isMobile = false,
   setIsChatOpen,
+  fullLogo,
+  compactLogo,
+  onHistoryScroll,
+  onHistoryScrollTop,
+  onHistoryScrollBottom,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null
   );
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const { theme, themes, fontSize, contrast } = useTheme();
 
@@ -58,13 +68,26 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
     setSearchTerm(term);
     if (onSearchChange) onSearchChange(term);
   };
+
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const container = event.currentTarget;
+
+    if (onHistoryScroll) onHistoryScroll(event);
+    if (container.scrollTop === 0 && onHistoryScrollTop) onHistoryScrollTop();
+    if (
+      container.scrollHeight - container.scrollTop === container.clientHeight &&
+      onHistoryScrollBottom
+    )
+      onHistoryScrollBottom();
+  };
+
   const PlusIcon = () => (
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ color: currentTheme?.primary_color }}
+      style={{ color: currentTheme?.btn_icon_color }}
     >
       <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" />
     </svg>
@@ -86,6 +109,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
       />
     </svg>
   );
+
   return (
     <div
       className={`sidebar ${isCollapsed ? "collapsed" : ""} `}
@@ -103,7 +127,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
       >
         {!isCollapsed ? (
           <>
-            <img className="logo-icon" src={logo} alt="Logo" />
+            <img className="logo-icon" src={fullLogo} alt="Logo" />
             <div className="new-chat-btn">
               <button
                 className={`${fontSize}`}
@@ -121,12 +145,20 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
                 value={searchTerm}
                 onChange={(e) => handleSearchTermChange(e.target.value)}
               />
-              <button className="history-box-button" onClick={onCreateNewChat}>
+              <button
+                className="history-box-button"
+                onClick={onCreateNewChat}
+                style={{ backgroundColor: currentTheme?.btn_bg_color }}
+              >
                 <PlusIcon />
               </button>
             </div>
 
-            <div className={`history-box-cards ${fontSize}`}>
+            <div
+              className={`history-box-cards ${fontSize}`}
+              ref={scrollRef}
+              onScroll={handleScroll}
+            >
               {history.map((item, index) => (
                 <HistoryCard
                   key={index}
@@ -142,10 +174,14 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
         ) : (
           <div className="icon-view">
             <div className="logo-wrapper">
-              <img className="logo" src={collapsedLogo} alt="Collapsed Logo" />
+              <img className="logo" src={compactLogo} alt="Compact Logo" />
             </div>
             <div className="collapsed-menu">
-              <button className="history-box-button" onClick={onCreateNewChat}>
+              <button
+                className="history-box-button"
+                onClick={onCreateNewChat}
+                style={{ backgroundColor: currentTheme?.btn_bg_color }}
+              >
                 <PlusIcon />
               </button>
             </div>
