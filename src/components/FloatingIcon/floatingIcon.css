@@ -1,4 +1,5 @@
 .floating-btn-wrapper {
+  display: flex;
   position: absolute;
   bottom: 100px;
   right: 25px;

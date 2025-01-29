@@ -1,23 +1,15 @@
 import React from "react";
 import { useTheme } from "../../themeContext/themeProvider";
 import "./historyCard.css";
+import { HistoryCardProps } from "./historyCard.types";
 
-interface HistoryCardProps {
-  title: string;
-  timeStamps: string | Date;
-  isActive: boolean;
-  isSelected: boolean;
-  onClick?: () => void;
-  sessionId?: string;
-}
 
 const HistoryCard: React.FC<HistoryCardProps> = ({
   title,
   timeStamps,
-  isActive,
+  isActive = false,
   isSelected,
   onClick,
-  sessionId,
 }) => {
   const { theme, themes, fontSize, contrast } = useTheme();
 

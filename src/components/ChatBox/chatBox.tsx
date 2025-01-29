@@ -1,29 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import ChatCard from "../Chats";
-import { ChatCardProps } from "../Chats/chatCard.types";
 import "./chatBox.css";
 import { useTheme } from "../../themeContext/themeProvider";
+import { ChatBoxProps } from "./chatBox.types";
 
-interface ChatBoxProps {
-  chats: ChatCardProps[];
-  onChatScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
-  onChatScrollTop?: () => void;
-  onChatScrollBottom?: () => void;
-  onSubmit: (message: string, sessionId?:string) => void;
-  onFileUpload?: (file: File, sessionId?:string) => void;
-  onStarClick?: (star: number, chatId?: string, sessionId?: string) => void; 
-  onTextFeedbackSubmit?: (
-    feedback: string,
-    chatId?: string,
-    sessionId?: string
-  ) => void; 
-  sessionId?: string;
-  userName?: string;
-  userProfileImage?: string;
-  aiName?: string;
-  aiProfileImage?: string;
-  isProfileImageRequired?: boolean;
-}
+
 
 const ChatBox: React.FC<ChatBoxProps> = (props) => {
   const [message, setMessage] = useState<string>("");
@@ -62,7 +43,7 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
 
   const handleSubmit = () => {
     if (message.trim()) {
-      props.onSubmit(message, props.sessionId || "");
+      props.onChatSubmit(message, props.sessionId || "");
       setMessage("");
     }
   };
@@ -128,7 +109,8 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
           {props.chats && props.chats.map((chat, index) => (
             <ChatCard
               key={index}
-              type={chat.type} // ai or user
+              type={chat.type}
+              sender={chat.sender} // ai or user
               text={chat.text} // Chat message
               timestamp={chat.timestamp} // Message timestamp
               userProfileImage={props.userProfileImage} // Profile image URL (optional)
@@ -144,6 +126,11 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
               chatId={chat.chatId || ""} // Chat ID for reference
               sessionId={chat.sessionId || props.sessionId || ""} // Session ID for reference
               onTextFeedbackSubmit={props.onTextFeedbackSubmit} // Callback for text feedback submission
+              actionCardTitle={chat.actionCardTitle} // Action card title (optional)
+              actions={chat.actions} // Action card buttons
+              actionCardSubtitle={chat.actionCardSubtitle} // Action card subtitle (optional)
+              handleActionCardClick={props.handleActionCardClick} // Callback for action card button click
+
             />
           ))}
         </div>

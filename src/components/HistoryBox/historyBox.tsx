@@ -4,31 +4,8 @@ import "./historyBox.css";
 import AccessibilityButton from "../Accessibility/accessibilityButton";
 import messageIcon from "../../assets/messageIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
-
-interface HistoryItem {
-  title: string;
-  timeStamps: string | Date;
-  isActive: boolean;
-  sessionId: string;
-}
-
-interface HistoryBoxProps {
-  history: HistoryItem[];
-  onCardClick?: (cardDetails: HistoryItem) => void;
-  onSearchChange?: (term: string) => void;
-  onCreateNewChat?: () => void;
-  isCollapsed?: boolean;
-  setIsCollapsed?: (isCollapsed: boolean) => void;
-  accessibilityOpen?: boolean;
-  setAccessibilityOpen?: (accessibilityOpen: boolean) => void;
-  isMobile?: boolean;
-  setIsChatOpen?: (isOpen: boolean) => void;
-  fullLogo?: string;
-  compactLogo?: string;
-  onHistoryScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
-  onHistoryScrollTop?: () => void;
-  onHistoryScrollBottom?: () => void;
-}
+import { HistoryCardProps } from "../Cards/historyCard.types";
+import { HistoryBoxProps } from "./historyBox.types";
 
 const HistoryBox: React.FC<HistoryBoxProps> = ({
   history,
@@ -56,7 +33,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
 
   const currentTheme = themes[theme] || themes.light;
 
-  const handleCardClick = (cardDetails: HistoryItem, index: number) => {
+  const handleCardClick = (cardDetails: HistoryCardProps, index: number) => {
     setSelectedCardIndex(index);
     if (isMobile) {
       setIsChatOpen && setIsChatOpen(true);
