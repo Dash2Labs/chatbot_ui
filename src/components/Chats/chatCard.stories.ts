@@ -54,6 +54,18 @@ export const WithStarsOnly: Story = {
   },
 };
 
+export const WithPDF: Story = {
+  args: {
+    type: "pdf",
+    sender: "user",
+    text: "",
+    timestamp: "10:40 AM",
+    pdfUrl: "https://www.example.com/sample.pdf",
+    pdfUploaded: true,
+  },
+};
+
+
 export const WithStarsAndTextFeedback: Story = {
   args: {
     type: "text",

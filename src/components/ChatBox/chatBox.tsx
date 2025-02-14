@@ -130,6 +130,8 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
               actions={chat.actions} // Action card buttons
               actionCardSubtitle={chat.actionCardSubtitle} // Action card subtitle (optional)
               handleActionCardClick={props.handleActionCardClick} // Callback for action card button click
+              pdfUploaded={chat.pdfUploaded} // PDF uploaded status
+              pdfUrl={chat.pdfUrl} // PDF URL
 
             />
           ))}

@@ -3,10 +3,11 @@ import { ChatCardProps } from "./chatCard.types";
 import "./chatCard.css";
 import { useTheme } from "../../themeContext/themeProvider";
 import CardWithActions from "../ActionableCard/cardWithActions";
+import pdfIcon from "../../assets/pdfIcon.svg";
 
 const ChatCard: React.FC<ChatCardProps> = ({
   type = "text",
-  sender ,
+  sender,
   text,
   timestamp,
   ratingEnabled = true,
@@ -26,7 +27,8 @@ const ChatCard: React.FC<ChatCardProps> = ({
   actionCardTitle,
   actionCardSubtitle,
   actions,
-
+  pdfUrl,
+  pdfUploaded,
 }) => {
   const [selectedStars, setSelectedStars] = useState<number>(rating);
   const [textFeedback, setTextFeedback] = useState<string>(feedback);
@@ -66,6 +68,39 @@ const ChatCard: React.FC<ChatCardProps> = ({
       />
     </svg>
   );
+
+  const PDFIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30.108"
+      height="40"
+      viewBox="0 0 30.108 40"
+    >
+      <g
+        id="Group_1508"
+        data-name="Group 1508"
+        transform="translate(-525 -641)"
+      >
+        <path
+          id="Path_6207"
+          data-name="Path 6207"
+          d="M51.077,58h-20.2a4.954,4.954,0,0,1-4.951-4.951v-30.1A4.954,4.954,0,0,1,30.873,18H44.329a4.92,4.92,0,0,1,3.5,1.45l6.75,6.75a4.895,4.895,0,0,1,1.45,3.5V53.049A4.954,4.954,0,0,1,51.079,58ZM30.863,20.9a2.052,2.052,0,0,0-2.051,2.051v30.1A2.052,2.052,0,0,0,30.863,55.1h20.2a2.052,2.052,0,0,0,2.051-2.051V29.7a2.033,2.033,0,0,0-.6-1.45l-6.75-6.75a2.033,2.033,0,0,0-1.45-.6H30.86Z"
+          transform="translate(499.078 623)"
+          fill="#242424"
+          style={{ fill: currentTheme?.accessibility_icon_color }}
+        />
+        <path
+          id="Path_6208"
+          data-name="Path 6208"
+          d="M.664,0V-5.6H3.208a3.55,3.55,0,0,1,1.608.348A2.657,2.657,0,0,1,5.9-4.28,2.724,2.724,0,0,1,6.3-2.8,2.73,2.73,0,0,1,5.9-1.324a2.647,2.647,0,0,1-1.088.976A3.55,3.55,0,0,1,3.208,0Zm1.3-1.064H3.144a2.1,2.1,0,0,0,.972-.212,1.538,1.538,0,0,0,.64-.6,1.8,1.8,0,0,0,.228-.92,1.792,1.792,0,0,0-.228-.924,1.545,1.545,0,0,0-.64-.6,2.1,2.1,0,0,0-.972-.212H1.96ZM9.992.1A3.406,3.406,0,0,1,8.764-.12a2.906,2.906,0,0,1-.976-.608,2.774,2.774,0,0,1-.64-.92A2.875,2.875,0,0,1,6.92-2.8a2.875,2.875,0,0,1,.228-1.152,2.747,2.747,0,0,1,.644-.92,2.959,2.959,0,0,1,.976-.608A3.351,3.351,0,0,1,9.984-5.7a3.342,3.342,0,0,1,1.22.216,2.923,2.923,0,0,1,.968.608,2.837,2.837,0,0,1,.644.916A2.824,2.824,0,0,1,13.048-2.8a2.86,2.86,0,0,1-.232,1.156,2.77,2.77,0,0,1-.644.92,2.957,2.957,0,0,1-.968.6A3.319,3.319,0,0,1,9.992.1Zm-.008-1.1a1.826,1.826,0,0,0,.692-.128,1.659,1.659,0,0,0,.556-.368,1.681,1.681,0,0,0,.372-.568,1.934,1.934,0,0,0,.132-.728,1.934,1.934,0,0,0-.132-.728,1.711,1.711,0,0,0-.368-.568,1.608,1.608,0,0,0-.556-.368,1.857,1.857,0,0,0-.7-.128,1.826,1.826,0,0,0-.692.128,1.659,1.659,0,0,0-.556.368,1.681,1.681,0,0,0-.372.568,1.934,1.934,0,0,0-.132.728,1.942,1.942,0,0,0,.132.724,1.7,1.7,0,0,0,.368.572,1.608,1.608,0,0,0,.556.368A1.857,1.857,0,0,0,9.984-1.008ZM16.7.1a3.352,3.352,0,0,1-1.2-.212,2.828,2.828,0,0,1-.964-.6,2.8,2.8,0,0,1-.636-.92,2.9,2.9,0,0,1-.228-1.16A2.9,2.9,0,0,1,13.9-3.96a2.774,2.774,0,0,1,.64-.92,2.88,2.88,0,0,1,.964-.6A3.342,3.342,0,0,1,16.712-5.7a3.309,3.309,0,0,1,1.316.252,2.564,2.564,0,0,1,.988.74l-.832.768a1.947,1.947,0,0,0-.64-.492,1.8,1.8,0,0,0-.768-.164,1.964,1.964,0,0,0-.72.128,1.632,1.632,0,0,0-.568.368,1.681,1.681,0,0,0-.372.568,1.934,1.934,0,0,0-.132.728,1.934,1.934,0,0,0,.132.728,1.681,1.681,0,0,0,.372.568,1.632,1.632,0,0,0,.568.368,1.964,1.964,0,0,0,.72.128,1.8,1.8,0,0,0,.768-.164,1.9,1.9,0,0,0,.64-.5l.832.768a2.6,2.6,0,0,1-.988.744A3.285,3.285,0,0,1,16.7.1Z"
+          transform="translate(530.336 666)"
+          fill="#242424"
+          style={{ fill: currentTheme?.accessibility_icon_color }}
+        />
+      </g>
+    </svg>
+  );
+
   return (
     <div
       className={`chat-card-container ${
@@ -208,14 +243,64 @@ const ChatCard: React.FC<ChatCardProps> = ({
             )}
           </div>
         </div>
-      ) : (
+      ) : type === "actionCard" ? (
         <CardWithActions
-        actionCardTitle={actionCardTitle}
-        actionCardSubtitle={actionCardSubtitle}
+          actionCardTitle={actionCardTitle}
+          actionCardSubtitle={actionCardSubtitle}
           actions={actions}
           sessionId={sessionId}
           handleActionCardClick={handleActionCardClick}
         />
+      ) : (
+        <div>
+          <ol className="chat">
+            <li
+              className="self"
+              style={
+                {
+                  "--dynamic-border-color": currentTheme?.cc_bg_color,
+                } as React.CSSProperties
+              }
+            >
+              <div
+                className={`msg ${fontSize} ${contrast}`}
+                style={{
+                  backgroundColor: currentTheme?.cc_msg_bg,
+                  color: currentTheme?.cc_primary_font_color,
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: currentTheme?.cc_msg_bg,
+                    color: currentTheme?.cc_primary_font_color,
+                    padding: "10px 40px",
+                    margin: "auto",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    if (pdfUrl) {
+                      const link = document.createElement("a");
+                      link.href = pdfUrl;
+                      link.download = pdfUrl.split("/").pop() || "download.pdf";
+                      link.click();
+                    }
+                  }}
+                >
+                  <PDFIcon />
+                </div>
+                <p
+                  className={`chat-text ${fontSize} ${contrast}`}
+                  style={{ textAlign: "center" }}
+                >
+                  {pdfUploaded ? "Success" : "Error"}
+                </p>
+                <p className={`chat-timestamp ${fontSize} ${contrast}`}>
+                  {timestamp}
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
       )}
 
       {/* Feedback Modal */}

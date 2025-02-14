@@ -50,6 +50,14 @@ export const DefaultChatBox: Story = {
         actionCardTitle: "Here are some options:",
         actionCardSubtitle: "Select an option to proceed.",
         actions: [{label: "Option 1"}, {label: "Option 2"}, {label: "Option 3"}],
+      },
+      {
+        type: "pdf",
+        sender:"user",
+        text: "",
+        timestamp: "10:30 PM",
+        pdfUrl: "https://www.example.com/sample.pdf",
+        pdfUploaded: true,
       }
     ],
     onChatSubmit: (message, sessionId) =>

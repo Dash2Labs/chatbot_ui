@@ -62,6 +62,14 @@ export const Default: Story = {
         ratingEnabled: true,
       },
       {
+        type: "pdf",
+        sender:"user",
+        text: "",
+        timestamp: "10:30 PM",
+        pdfUrl: "https://www.example.com/sample.pdf",
+        pdfUploaded: true,
+      },
+      {
         type: "actionCard",
         sender:"ai",
         text: "",

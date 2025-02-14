@@ -1,6 +1,6 @@
 export interface BasicChatProps {
   sender: "ai" | "user"; // Determines if the card is AI or User
-  type:"text"| "actionCard"; // Determines the type of chat card
+  type:"text"| "actionCard"| "pdf"; // Determines the type of chat card
   text: string; // The chat text
   timestamp: string; // The timestamp of the chat
   profileImage?: string; // Optional: Profile image URL
@@ -34,4 +34,9 @@ export interface CardWithActionsProps {
   handleActionCardClick?: (label: string, sessionId?: string) => void;
 }
 
-export interface ChatCardProps extends BasicChatProps, userDetailsProps,CardWithActionsProps {}
+export interface PDFCardProps{
+  pdfUrl?: string;
+  pdfUploaded?: boolean;
+}
+
+export interface ChatCardProps extends BasicChatProps, userDetailsProps,CardWithActionsProps,PDFCardProps {}
