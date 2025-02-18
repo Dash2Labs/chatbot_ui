@@ -131,4 +131,4 @@ interface FullChatbotProps extends BasicChatBoxProps, BasicHistoryBoxProps, Logo
 
 declare const FullChatbot: React$1.FC<FullChatbotProps>;
 
-export { Button, ChatBox, ChatCard, FullChatbot, Header, HistoryBox, HistoryCard, SwitchToggle };
+export { Button, ChatBox, type ChatBoxProps, ChatCard, type ChatCardProps, FullChatbot, Header, HistoryBox, type HistoryBoxProps, HistoryCard, type HistoryCardProps, SwitchToggle };

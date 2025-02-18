@@ -6,3 +6,7 @@ export { default as ChatCard } from "./Chats";
 export { default as ChatBox } from "./ChatBox";
 export { default as Header } from "./Header";
 export { default as FullChatbot } from "./FullChatbot";
+export { HistoryCardProps } from "./Cards";
+export { HistoryBoxProps } from "./HistoryBox";
+export { ChatCardProps } from "./Chats";
+export { ChatBoxProps } from "./ChatBox";
