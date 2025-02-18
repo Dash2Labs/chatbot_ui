@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MobileChatbot from "./mobileChatbot";
-import { ChatbotProps } from "./chatbotProps";
 import WebChatbot from "./webChatbot";
 import { ThemeProvider } from "../../themeContext/themeProvider";
+import { FullChatbotProps } from "./chatbotProps";
 
 
-interface FullChatbotProps extends ChatbotProps {}
 
 const FullChatbot: React.FC<FullChatbotProps> = (props) => {
   const [isMobile, setIsMobile] = useState(true);
@@ -46,6 +45,7 @@ const FullChatbot: React.FC<FullChatbotProps> = (props) => {
     fullLogo: props.fullLogo,
     compactLogo: props.compactLogo,
     isMobile: isMobile,
+    handleActionCardClick: props.handleActionCardClick,
   };
 
   return (
@@ -54,7 +54,7 @@ const FullChatbot: React.FC<FullChatbotProps> = (props) => {
         {!isMobile ? (
           <WebChatbot {...commonProps} />
         ) : (
-          <MobileChatbot {...commonProps} isMobile={isMobile} />
+          <MobileChatbot {...commonProps}  />
         )}
       </ThemeProvider>
 

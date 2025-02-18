@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+.card-with-actions {
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: relative;
+  padding-right: 20px !important;
+  max-width: 75%;
+  font-family: "Montserrat", serif;
+  padding-top: 0.5rem;
+}
+.card-with-actions .msg {
+  order: 1;
+  border-top-left-radius: 0px;
+  box-shadow: 0px 3px 6px #00000014;
+  margin-left: 27px;
+}
+.card-with-actions:after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  left: 7px;
+  width: 0px;
+  height: 0px;
+  border: 10px solid var(--dynamic-border-color, #fff);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  filter: drop-shadow(-2px 2px 2px #00000014);
+}
+.card-with-actions h3 {
+  margin: 0;
+}
+.card-actions button {
+  border: 1px solid #e9e9e9;
+  border-radius: 30px;
+  padding: 11px 20px;
+  background-color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.title,
+.card-subtitle {
+  margin-bottom: 20px;
+}

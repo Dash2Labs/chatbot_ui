@@ -13,7 +13,8 @@ type Story = StoryObj<typeof ChatCard>;
 
 export const DefaultAI: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "Hello! How can I assist you today?",
     timestamp: "10:30 AM",
   },
@@ -21,7 +22,8 @@ export const DefaultAI: Story = {
 
 export const WithProfileImage: Story = {
   args: {
-    type: "user",
+    type: "text",
+    sender:"user",
     text: "Can you tell me about the weather?",
     timestamp: "10:31 AM",
     profileImage: "https://via.placeholder.com/40",
@@ -31,17 +33,19 @@ export const WithProfileImage: Story = {
 
 export const WithInitials: Story = {
   args: {
-    type: "user",
+    type: "text",
+    sender:"user",
     text: "Please let me know more details.",
     timestamp: "10:32 AM",
-    name: "John Doe",
+    userName: "John Doe",
     isProfileImageRequired: true,
   },
 };
 
 export const WithStarsOnly: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "How satisfied are you with this response?",
     timestamp: "10:34 AM",
     ratingEnabled: true,
@@ -50,9 +54,22 @@ export const WithStarsOnly: Story = {
   },
 };
 
+export const WithPDF: Story = {
+  args: {
+    type: "pdf",
+    sender: "user",
+    text: "",
+    timestamp: "10:40 AM",
+    pdfUrl: "https://www.example.com/sample.pdf",
+    pdfUploaded: true,
+  },
+};
+
+
 export const WithStarsAndTextFeedback: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "Do you need any additional help?",
     timestamp: "10:35 AM",
     ratingEnabled: true,
@@ -70,7 +87,8 @@ export const WithStarsAndTextFeedback: Story = {
 
 export const WithExistingFeedbackAndRating: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "Here’s the information you requested.",
     timestamp: "10:36 AM",
     feedback: "Great response, very helpful!",
@@ -90,7 +108,8 @@ export const WithExistingFeedbackAndRating: Story = {
 
 export const UserWithoutImage: Story = {
   args: {
-    type: "user",
+    type: "text",
+    sender:"user",
     text: "Thank you for your assistance.",
     timestamp: "10:37 AM",
     isProfileImageRequired: false, // No profile image displayed
@@ -99,7 +118,8 @@ export const UserWithoutImage: Story = {
 
 export const AIWithoutImage: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "Let me know if you need further assistance.",
     timestamp: "10:38 AM",
     isProfileImageRequired: false, // No profile image displayed
@@ -108,7 +128,8 @@ export const AIWithoutImage: Story = {
 
 export const FullFeedbackExample: Story = {
   args: {
-    type: "ai",
+    type: "text",
+    sender:"ai",
     text: "Please provide your feedback for this response.",
     timestamp: "10:39 AM",
     ratingEnabled: true,

@@ -5,11 +5,10 @@ import Header from "../Header/header";
 import "./fullChatbot.css";
 import Accessibility from "../Accessibility/accessibilityPage";
 import { useTheme } from "../../themeContext/themeProvider";
-import { ChatbotProps } from "./chatbotProps";
+import { FullChatbotProps } from "./chatbotProps";
 
-interface WebChatbotProps extends ChatbotProps {}
 
-const WebChatbot: React.FC<WebChatbotProps> = (props) => {
+const WebChatbot: React.FC<FullChatbotProps> = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const { theme, themes } = useTheme();
@@ -81,7 +80,7 @@ const WebChatbot: React.FC<WebChatbotProps> = (props) => {
           ) : (
             <ChatBox
               chats={props.chats}
-              onSubmit={props.onChatSubmit}
+              onChatSubmit={props.onChatSubmit}
               onChatScroll={props.onChatScroll}
               onChatScrollBottom={props.onChatScrollBottom}
               onChatScrollTop={props.onChatScrollTop}
@@ -94,6 +93,7 @@ const WebChatbot: React.FC<WebChatbotProps> = (props) => {
               aiName={props.aiName}
               aiProfileImage={props.aiProfileImage}
               isProfileImageRequired={props.isProfileImageRequired}
+              handleActionCardClick={props.handleActionCardClick}
             />
           )}
         </div>

@@ -5,13 +5,10 @@ import Header from "../Header/header";
 import "./fullChatbot.css";
 import Accessibility from "../Accessibility/accessibilityPage";
 import { useTheme } from "../../themeContext/themeProvider";
-import { ChatbotProps } from "./chatbotProps";
+import { FullChatbotProps } from "./chatbotProps";
 
-export interface MobileChatbotProps extends ChatbotProps {
-  isMobile: boolean;
-}
 
-const MobileChatbot: React.FC<MobileChatbotProps> = (props) => {
+const MobileChatbot: React.FC<FullChatbotProps> = (props) => {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [ischatOpen, setIsChatOpen] = useState(false);
   const { theme, themes } = useTheme();
@@ -66,7 +63,7 @@ const MobileChatbot: React.FC<MobileChatbotProps> = (props) => {
           <div className="main-pages">
             <ChatBox
               chats={props.chats}
-              onSubmit={props.onChatSubmit}
+              onChatSubmit={props.onChatSubmit}
               onChatScroll={props.onChatScroll}
               onChatScrollBottom={props.onChatScrollBottom}
               onChatScrollTop={props.onChatScrollTop}
@@ -79,6 +76,7 @@ const MobileChatbot: React.FC<MobileChatbotProps> = (props) => {
               aiName={props.aiName}
               aiProfileImage={props.aiProfileImage}
               isProfileImageRequired={props.isProfileImageRequired}
+              handleActionCardClick={props.handleActionCardClick}
             />
           </div>
         )}
