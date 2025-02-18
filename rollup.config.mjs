@@ -4,7 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import image from "@rollup/plugin-image";
 import postcss from "rollup-plugin-postcss";
-import packageJson from "./package.json" assert { type: "json" };
+import packageJson from "./package.json" with { type: "json" };
 import svgr from '@svgr/rollup';
 
 export default [
