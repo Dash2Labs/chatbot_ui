@@ -110,6 +110,34 @@
 .extra-bold {
   font-weight: 800;
 }
+@container (max-width: 600px) {
+  .font-container {
+    min-height: auto;
+    max-height: 100%;
+    padding: 10px;
+  }
+  .font-container .selected {
+    display: none;
+  }
+  .selected-wrapper {
+    display: none;
+  }
+  .accessibility-container {
+    padding: 20px 10px;
+    height: calc(100vh - 300px);
+
+  }
+}
+
+@container (max-width: 600px) {
+  .contrast-wrapper {
+    flex-wrap: wrap;
+  }
+  .contrast-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
 
 @media (max-width: 1200px) {
   .contrast-wrapper {
@@ -120,6 +148,7 @@
     margin-bottom: 20px;
   }
 }
+
 @media (max-width: 600px) {
   .font-container {
     min-height: auto;

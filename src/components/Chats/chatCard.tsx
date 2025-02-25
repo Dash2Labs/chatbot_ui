@@ -155,7 +155,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
           >
             {ratingEnabled && sender === "ai" && (
               <>
-                <label className={`${fontSize} ${contrast}`}>
+                <label className={`${fontSize} ${contrast} feedback-label`}>
                   Rate this response
                 </label>
                 <div className="feedback-star-container">

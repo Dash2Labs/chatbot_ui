@@ -132,6 +132,14 @@
 .extra-bold {
   font-weight: 800;
 }
+@container (max-width: 361px) {
+  .chat-box-container {
+    padding: 20px 10px;
+    margin: 0 15px;
+    max-height: calc(100vh - 300px);
+
+  }
+}
 @media (max-width: 600px) {
   .chat-box-container {
     padding: 20px 10px;

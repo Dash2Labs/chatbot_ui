@@ -103,6 +103,21 @@
 .extra-bold {
   font-weight: 800;
 }
+@container (max-width: 361px) {
+  .logo-icon {
+    display: none;
+  }
+  .history-box-cards {
+    
+    max-height: calc(100vh - 410px);
+  }
+  .history-box-button {
+    display: none;
+  }
+  .new-chat-btn button {
+    display: flex;
+  }
+}
 @media (max-width: 600px) {
   .logo-icon {
     display: none;

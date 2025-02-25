@@ -35,7 +35,7 @@ const SwitchToggle: React.FC<SwitchProps> = ({
   }, [currentTheme]);
 
   return (
-    <div className="switch-container">
+    <div className="switch-container parent-container">
       {label && (
         <span
           className={`switch-label ${fontSize} ${contrast}`}
