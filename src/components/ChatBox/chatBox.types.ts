@@ -16,6 +16,7 @@ export interface BasicChatBoxProps {
   ) => void; 
   sessionId?: string;
   handleActionCardClick?: (label: string, sessionId?: string) => void;
+  isResponseLoading?: boolean;
 }
 
 export interface ChatBoxProps extends BasicChatBoxProps, userDetailsProps {}

@@ -36,6 +36,8 @@ const Header: React.FC<HeaderProps> = ({
   const { theme, setTheme, themes, fontSize, contrast } = useTheme();
   const currentTheme = themes[theme] || themes.light;
 
+
+
   return (
     <div className="web-header" style={customStyles}>
       {isMobile && (

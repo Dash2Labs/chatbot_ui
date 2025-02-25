@@ -7,7 +7,7 @@ import { FullChatbotProps } from "./chatbotProps";
 
 
 const FullChatbot: React.FC<FullChatbotProps> = (props) => {
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {

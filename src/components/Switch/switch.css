@@ -6,6 +6,7 @@
   justify-content: center;
   margin-right: 50px;
   font-family: "Montserrat", serif;
+ 
 }
 
 .switch {
@@ -98,7 +99,14 @@ input:disabled + .slider {
 .extra-bold {
   font-weight: 800;
 }
-
+@container (max-width : 361px) {
+  .switch-label {
+    display: none;
+  }
+  .switch-container {
+    margin-right: 10px;
+  }
+}
 @media (max-width: 600px) {
   .switch-label {
     display: none;

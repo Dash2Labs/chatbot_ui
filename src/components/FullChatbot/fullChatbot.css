@@ -122,6 +122,15 @@ p {
 .icon-view {
   padding-top: 20px;
 }
+@container (max-width: 600px) {
+  .arrow {
+    display: none;
+  }
+  .sidebar {
+    margin: 0 auto;
+    width: calc(100% - 60px);
+  }
+}
 @media (min-width: 768px) and (max-width: 1024px) {
   .sidebar {
     position: fixed;

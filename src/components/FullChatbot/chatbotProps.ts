@@ -5,3 +5,5 @@ import { userDetailsProps } from "../Chats/chatCard.types";
 
 
 export interface FullChatbotProps extends  BasicChatBoxProps, BasicHistoryBoxProps, LogoProps, userDetailsProps {}
+
+
