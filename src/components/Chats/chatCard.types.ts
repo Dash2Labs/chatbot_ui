@@ -1,25 +1,24 @@
 export interface BasicChatProps {
-  sender: "ai" | "user"; // Determines if the card is AI or User
-  type:"text"| "actionCard"| "pdf"; // Determines the type of chat card
-  text: string; // The chat text
-  timestamp: string; // The timestamp of the chat
-  profileImage?: string; // Optional: Profile image URL
-  ratingEnabled?: boolean; // Optional: Enables the star feedback system
-  textFeedbackEnabled?: boolean; // Optional: Enables text feedback modal
-  feedback?: string; // Submitted feedback text
-  rating?: number ; // Submitted star rating (1-5 stars)
   chatId?: string; // Unique chat ID
+  feedback?: string; // Submitted feedback text
+  onStarClick?: (star: number, chatId?: string, sessionId?: string) => void; // Callback for feedback submission
+  onTextFeedbackSubmit?: (feedback: string, chatId?: string, sessionId?: string) => void; // Callback for text feedback submission
+  rating?: number; // Submitted star rating (1-5 stars)
+  ratingEnabled?: boolean; // Optional: Enables the star feedback system
+  sender: "ai" | "user"; // Determines if the card is AI or User
   sessionId?: string; // Unique session ID
-  onStarClick?: (star: number, chatId?:string, sessionId?:string) => void; // Callback for feedback submission
-  onTextFeedbackSubmit?: (feedback: string, chatId?:string, sessionId?:string) => void; // Callback for text feedback submission
+  text: string; // The chat text
+  textFeedbackEnabled?: boolean; // Optional: Enables text feedback modal
+  timestamp: string; // The timestamp of the chat
+  type: "text" | "actionCard" | "pdf"; // Determines the type of chat card
 }
 
 export interface userDetailsProps {
-  userName?: string;
-  userProfileImage?: string;
   aiName?: string;
   aiProfileImage?: string;
   isProfileImageRequired?: boolean;
+  userName?: string;
+  userProfileImage?: string;
 }
 
 interface Action {
@@ -27,16 +26,16 @@ interface Action {
 }
 
 export interface CardWithActionsProps {
-  actionCardTitle?: string;
-  actionCardSubtitle?: string;
   actions?: Action[];
-  sessionId?: string;
+  actionCardSubtitle?: string;
+  actionCardTitle?: string;
   handleActionCardClick?: (label: string, sessionId?: string) => void;
+  sessionId?: string;
 }
 
 export interface PDFCardProps{
-  pdfUrl?: string;
   pdfUploaded?: boolean;
+  pdfUrl?: string;
 }
 
 export interface ChatCardProps extends BasicChatProps, userDetailsProps,CardWithActionsProps,PDFCardProps {}

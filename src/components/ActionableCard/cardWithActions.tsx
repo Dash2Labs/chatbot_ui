@@ -3,8 +3,6 @@ import "./cardWithActions.css";
 import { useTheme } from "../../themeContext/themeProvider";
 import { CardWithActionsProps } from "../Chats/chatCard.types";
 
-
-
 const CardWithActions: React.FC<CardWithActionsProps> = ({
   actionCardTitle,
   actionCardSubtitle,
