@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect, ReactNode } from "react";
 import "./floatingIcon.css";
 import MobileChatbot from "../FullChatbot/mobileChatbot";
 import { FullChatbotProps } from "../FullChatbot/chatbotProps";
+import FullChatbot from "../FullChatbot";
 import { ThemeProvider } from "../../themeContext/themeProvider";
-
-
 
 const FloatingIcon: React.FC<FullChatbotProps> = (props) => {
   const [isContentVisible, setIsContentVisible] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
+    if (
+      contentRef.current &&
+      !contentRef.current.contains(event.target as Node)
+    ) {
       setIsContentVisible(false);
     }
   };
@@ -72,10 +74,13 @@ const FloatingIcon: React.FC<FullChatbotProps> = (props) => {
       </div>
       {isContentVisible && (
         <div className="mobilebot-container" ref={contentRef}>
-          <ThemeProvider>
-             <MobileChatbot {...commonProps}  />
-             </ThemeProvider>
-
+          <ThemeProvider
+            onSettingsChange={props.onSettingsChange}
+            initialSettings={props.initialSettings}
+            customThemes={props.customThemes}
+          >
+            <MobileChatbot {...commonProps} />
+          </ThemeProvider>
         </div>
       )}
     </>

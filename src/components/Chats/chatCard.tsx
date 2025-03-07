@@ -4,6 +4,7 @@ import "./chatCard.css";
 import { useTheme } from "../../themeContext/themeProvider";
 import CardWithActions from "../ActionableCard/cardWithActions";
 import pdfIcon from "../../assets/pdfIcon.svg";
+import { useTranslation } from "../../Locales/translations";
 
 const ChatCard: React.FC<ChatCardProps> = ({
   type = "text",
@@ -33,6 +34,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
   const [selectedStars, setSelectedStars] = useState<number>(rating);
   const [textFeedback, setTextFeedback] = useState<string>(feedback);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const getInitials = () => {
     if (sender === "ai") {
@@ -156,7 +158,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
             {ratingEnabled && sender === "ai" && (
               <>
                 <label className={`${fontSize} ${contrast} feedback-label`}>
-                  Rate this response
+                  {t("rate_this_response")}
                 </label>
                 <div className="feedback-star-container">
                   <div className="feedback-stars">
@@ -292,7 +294,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
                   className={`chat-text ${fontSize} ${contrast}`}
                   style={{ textAlign: "center" }}
                 >
-                  {pdfUploaded ? "Success" : "Error"}
+                  {pdfUploaded ? `${t("success")}` : `${t("error")}`}
                 </p>
                 <p className={`chat-timestamp ${fontSize} ${contrast}`}>
                   {timestamp}
@@ -320,7 +322,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
             <div className="modal-content">
               <div className="title-cancel">
                 <h3 className={`${fontSize} ${contrast}`}>
-                  Comment on the response
+                  {t("comment_on_response")}
                 </h3>
                 <button
                   className="modal-close"
@@ -331,7 +333,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
               </div>
               <textarea
                 className={`modal-textarea ${fontSize} ${contrast}`}
-                placeholder="Write your feedback..."
+                placeholder={t("write_your_feedback")}
                 value={textFeedback}
                 onChange={(e) => setTextFeedback(e.target.value)}
                 style={{
@@ -348,7 +350,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
                       onTextFeedbackSubmit(textFeedback, chatId, sessionId);
                   }}
                 >
-                  Save
+                  {t("save")}
                 </button>
               </div>
             </div>

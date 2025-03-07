@@ -136,7 +136,7 @@
   .chat-box-container {
     padding: 20px 10px;
     margin: 0 15px;
-    max-height: calc(100vh - 300px);
+    height: 310px;
 
   }
 }

@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import SwitchToggle from "../Switch/switch";
 import { useTheme } from "../../themeContext/themeProvider";
 import AccessibilityButton from "../Accessibility/accessibilityButton";
+import { useTranslation } from "../../Locales/translations";
 
 interface HeaderProps {
-  userName?: string; // Display the username dynamically
-  handleToggle?: (checked: boolean) => void; // Callback for theme toggle
-  isToggleChecked?: boolean; // Controlled state for dark mode
-  toggleLabel?: string; // Custom label for the toggle switch
-  customStyles?: React.CSSProperties; // Optional custom styles for the header wrappers
-  profileStyles?: React.CSSProperties; // Optional custom styles for the profile section
-  isMobile?: boolean; // Optional prop to determine if the header is rendered on mobile
-  isChatOpen?: boolean; // Optional prop to determine if the chat is open
-  accessibilityOpen?: boolean; // Optional prop to determine if the accessibility panel is open
-  setIsChatOpen?: (isOpen: boolean) => void; // Callback to toggle chat
-  setAccessibilityOpen?: (isOpen: boolean) => void; // Callback to toggle accessibility panel
+  userName?: string;
+  handleToggle?: (checked: boolean) => void;
+  isToggleChecked?: boolean;
+  toggleLabel?: string;
+  customStyles?: React.CSSProperties;
+  profileStyles?: React.CSSProperties;
+  isMobile?: boolean;
+  isChatOpen?: boolean;
+  accessibilityOpen?: boolean;
+  setIsChatOpen?: (isOpen: boolean) => void;
+  setAccessibilityOpen?: (isOpen: boolean) => void;
   compactLogo?: string;
   userProfileImage?: string;
+  onSignoutClick?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   userName,
-  toggleLabel = "Dark mode",
   customStyles,
   profileStyles,
   isMobile = false,
@@ -32,12 +33,69 @@ const Header: React.FC<HeaderProps> = ({
   setAccessibilityOpen,
   compactLogo,
   userProfileImage,
+  onSignoutClick,
 }) => {
-  const { theme, setTheme, themes, fontSize, contrast } = useTheme();
+  const {
+    theme,
+    setTheme,
+    themes,
+    fontSize,
+    contrast,
+    setIsSignupOpen,
+    isUserLoggedIn,
+    language,
+    setLanguage,
+  } = useTheme();
   const currentTheme = themes[theme] || themes.light;
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
+  const { t } = useTranslation();
 
+  const languages: { langauge: string; label: string }[] = [
+    { langauge: "en", label: "English" },
+    { langauge: "es", label: "Spanish" },
+    { langauge: "zh", label: "Chinese" },
+    { langauge: "nv", label: "Navajo" },
+    { langauge: "vi", label: "Vietnamese" },
+  ];
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        event.target &&
+        !(event.target as Element).closest(".profile-container")
+      ) {
+        setIsOpen(false);
+      }
+      if (
+        event.target &&
+        !(event.target as Element).closest(".laguange-wrapper")
+      ) {
+        setIsLanguageDropdownOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+  const ArrowIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="6.112"
+      height="11"
+      viewBox="0 0 5.112 10"
+    >
+      <g id="Group_1476" data-name="Group 1476" transform="translate(0)">
+        <path
+          id="Path_42"
+          data-name="Path 42"
+          d="M27,962.325a.555.555,0,0,1,.142-.333l4-4.444a.556.556,0,0,1,.826.743L28.3,962.363l3.667,4.073a.556.556,0,0,1-.826.743l-4-4.444A.556.556,0,0,1,27,962.325Z"
+          transform="translate(-26.994 -957.363)"
+          style={{ fill: currentTheme?.cc_primary_font_color }}
+        />
+      </g>
+    </svg>
+  );
   return (
     <div className="web-header" style={customStyles}>
       {isMobile && (
@@ -70,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <SwitchToggle
           checked={theme === "dark"}
-          label={toggleLabel}
+          label={t("enable_dark_theme")}
           onChange={(checked) => {
             setTheme(checked ? "dark" : "light");
           }}
@@ -99,6 +157,62 @@ const Header: React.FC<HeaderProps> = ({
           }}
           className="collapsed-accessibility"
         />
+        {/* <select
+          id="language-select"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as any)}
+          className={`language-dropdown ${fontSize} ${contrast}`}
+          style={{
+            backgroundColor: currentTheme?.cb_input_bg_color,
+            color: currentTheme?.cc_primary_font_color,
+            borderColor: currentTheme?.cb_input_border_color,
+          }}
+        >
+          {languages.map((lang) => (
+            <option key={lang.langauge} value={lang.langauge}>
+              {lang.label}
+            </option>
+          ))}
+        </select> */}
+        <div className="laguange-wrapper">
+          <button
+            onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+            className={`language-dropdown  ${fontSize} ${contrast}`}
+            style={{
+              color: currentTheme?.cc_primary_font_color,
+            }}
+          >
+            <div style={{ textTransform: "uppercase" }}>
+              {languages
+                .find((lang) => lang.langauge === language)
+                ?.label.toUpperCase()
+                .slice(0, 3) || "Select language"}{" "}
+              <span
+                className={`lang-arrow ${
+                  isLanguageDropdownOpen ? "lang-arrow-up" : ""
+                }`}
+              >
+                <ArrowIcon />
+              </span>
+            </div>
+          </button>
+          {isLanguageDropdownOpen && (
+            <div className="language-list">
+              {languages.map((lang) => (
+                <div
+                  key={lang.langauge}
+                  onClick={() => {
+                    setLanguage(lang.langauge);
+                    setIsLanguageDropdownOpen(false);
+                  }}
+                  className={`${fontSize} ${contrast}`}
+                >
+                  {lang.label}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="profile-wrapper" style={profileStyles}>
           <p
             className={`user-name ${fontSize} ${contrast}`}
@@ -106,27 +220,50 @@ const Header: React.FC<HeaderProps> = ({
               color: currentTheme?.font_color,
             }}
           >
-            Hello {userName}
+            {t("hello")} {userName}
           </p>
-          <div
-            className="profile"
-            style={{
-              backgroundColor: currentTheme?.profile_bg_color,
-              color: currentTheme?.profile_font_color,
-            }}
-          >
-            {/* {userName.charAt(0).toUpperCase()} */}
-            {userProfileImage ? (
-              <img
-                src={userProfileImage}
-                width={"40px"}
-                height={"40px"}
-                style={{ borderRadius: "50%" }}
-                alt={"profile"}
-              />
-            ) : (
-              <div className={`profile-initials}`}>
-                {userName?.charAt(0).toUpperCase()}
+
+          <div className="profile-container">
+            <div
+              className="profile"
+              style={{
+                backgroundColor: currentTheme?.profile_bg_color,
+                color: currentTheme?.profile_font_color,
+              }}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {userProfileImage ? (
+                <img
+                  src={userProfileImage}
+                  width="40"
+                  height="40"
+                  className="profile-img"
+                  alt="profile"
+                />
+              ) : (
+                <div className="profile-initials">
+                  {userName?.charAt(0).toUpperCase()}
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown Menu */}
+            {isOpen && (
+              <div
+                className="dropdown-menu"
+                style={{
+                  backgroundColor: currentTheme?.main_container_bg,
+                  color: currentTheme?.cc_primary_font_color,
+                }}
+              >
+                <ul className={`${fontSize} ${contrast}`}>
+                  <li onClick={() => setIsSignupOpen(true)}>{t("sign_in")}</li>
+                  {isUserLoggedIn && (
+                    <li onClick={() => onSignoutClick && onSignoutClick()}>
+                      Signout
+                    </li>
+                  )}
+                </ul>
               </div>
             )}
           </div>

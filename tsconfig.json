@@ -3,6 +3,7 @@
     /* Language and Environment */
     "target": "esnext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "jsx": "react-jsx" /* Specify what JSX code is generated. */,
+    "resolveJsonModule": true,
 
     /* Modules */
     "module": "ESNext" /* Specify what module code is generated. */,
