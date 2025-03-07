@@ -136,15 +136,14 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
 
             />
           ))}
-          {/* {
-            props.isResponseLoading && ( */}
+            {props.isResponseLoading && ( 
               <ChatLoader
                 isProfileImageRequired={props.isProfileImageRequired}
                 aiName={props.aiName}
                 aiProfileImage={props.aiProfileImage}
               />
-            {/* )
-          } */}
+            )
+            } 
         </div>
         <div className="chat-box-input-area">
           <div className="input-upload-container">

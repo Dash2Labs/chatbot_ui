@@ -21,7 +21,7 @@ export interface userDetailsProps {
   userProfileImage?: string;
 }
 
-interface Action {
+export interface Action {
   label: string;
 }
 

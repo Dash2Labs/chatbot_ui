@@ -10,5 +10,6 @@ export { HistoryCardProps } from "./Cards";
 export { HistoryBoxProps } from "./HistoryBox";
 export { ChatCardProps } from "./Chats";
 export { ChatBoxProps } from "./ChatBox";
+export { Action } from "./Chats/chatCard.types";
 
 

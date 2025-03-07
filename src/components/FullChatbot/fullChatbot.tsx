@@ -46,6 +46,7 @@ const FullChatbot: React.FC<FullChatbotProps> = (props) => {
     sessionId: props.sessionId,
     userName: props.userName,
     userProfileImage: props.userProfileImage,
+    isResponseLoading: props.isResponseLoading,
   };
 
   return (
