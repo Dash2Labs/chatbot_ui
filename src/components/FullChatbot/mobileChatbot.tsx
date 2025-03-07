@@ -6,7 +6,9 @@ import "./fullChatbot.css";
 import Accessibility from "../Accessibility/accessibilityPage";
 import { useTheme } from "../../themeContext/themeProvider";
 import { FullChatbotProps } from "./chatbotProps";
-
+import SignupModal from "../Signup/signupModal";
+import SignupPage from "../Signup/signupPage";
+import Toaster from "../Toaster/toaster";
 
 const MobileChatbot: React.FC<FullChatbotProps> = (props) => {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
@@ -77,6 +79,7 @@ const MobileChatbot: React.FC<FullChatbotProps> = (props) => {
               aiProfileImage={props.aiProfileImage}
               isProfileImageRequired={props.isProfileImageRequired}
               handleActionCardClick={props.handleActionCardClick}
+              isResponseLoading={props.isResponseLoading}
             />
           </div>
         )}
@@ -85,6 +88,9 @@ const MobileChatbot: React.FC<FullChatbotProps> = (props) => {
           <div className="main-pages">
             <Accessibility />
           </div>
+        )}
+        {props.toasterConfig?.isToasterOpen && (
+          <Toaster toasterConfig={props.toasterConfig} />
         )}
       </div>
     </>

@@ -91,6 +91,7 @@ p {
   display: flex;
   justify-content: flex-end;
   min-height: 72px;
+  z-index: 999;
 }
 .main-pages {
   height: calc(100vh - 72px);
@@ -101,10 +102,9 @@ p {
 }
 .collapsed-arrow {
   left: 60px;
-}
-.collapsed-arrow img {
   transform: rotate(180deg);
 }
+
 .collapsed-menu {
   margin-top: 30px;
   display: flex;

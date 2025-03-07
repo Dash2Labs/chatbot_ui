@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Dropdown</title>
+    <style>
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+        }
+
+        /* Dropdown button */
+        .dropdown-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        /* Dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        /* Dropdown items */
+        .dropdown-content div {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Highlight selected option */
+        .selected {
+            background-color: #3498db !important;
+            color: white;
+        }
+
+        /* Show dropdown */
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dropdown">
+        <button class="dropdown-btn" onclick="toggleDropdown()"  className="profile"
+           >Select an option ▼</button>
+        <div class="dropdown-content" id="dropdownMenu">
+            <div onclick="selectOption(this)">Option 1</div>
+            <div onclick="selectOption(this)">Option 2</div>
+            <div onclick="selectOption(this)">Option 3</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("show");
+        }
+
+        function selectOption(element) {
+            // Remove "selected" class from all options
+            document.querySelectorAll(".dropdown-content div").forEach(option => {
+                option.classList.remove("selected");
+            });
+
+            // Add "selected" class to the clicked option
+            element.classList.add("selected");
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                document.getElementById("dropdownMenu").classList.remove("show");
+            }
+        };
+    </script>
+
+</body>
+</html>

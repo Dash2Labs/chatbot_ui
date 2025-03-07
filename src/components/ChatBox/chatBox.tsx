@@ -4,12 +4,12 @@ import "./chatBox.css";
 import { useTheme } from "../../themeContext/themeProvider";
 import { ChatBoxProps } from "./chatBox.types";
 import ChatLoader from "../Loaders/chatLoader";
-
-
+import { useTranslation } from "../../Locales/translations";
 
 const ChatBox: React.FC<ChatBoxProps> = (props) => {
   const [message, setMessage] = useState<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const { theme, themes, fontSize, contrast } = useTheme();
   const currentTheme = themes[theme] || themes.light;
@@ -18,12 +18,13 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
     const container = event.currentTarget;
 
     if (props.onChatScroll) props.onChatScroll(event);
-    if (container.scrollTop === 0 && props.onChatScrollTop) props.onChatScrollTop();
+    if (container.scrollTop === 0 && props.onChatScrollTop)
+      props.onChatScrollTop();
     if (
       container.scrollHeight - container.scrollTop === container.clientHeight &&
       props.onChatScrollBottom
     )
-    props.onChatScrollBottom();
+      props.onChatScrollBottom();
   };
 
   const scrollToBottom = () => {
@@ -39,7 +40,8 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && props.onFileUpload) props.onFileUpload(file, props.sessionId || "");
+    if (file && props.onFileUpload)
+      props.onFileUpload(file, props.sessionId || "");
   };
 
   const handleSubmit = () => {
@@ -48,6 +50,21 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
       setMessage("");
     }
   };
+
+  const isMobile = () => {
+    return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && message.trim()) {
+      if (!isMobile()) {
+        handleSubmit();
+        event.preventDefault();
+      }
+    }
+  };
+
+  
   const SendIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +107,7 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
           color: currentTheme?.primary_font_color,
         }}
       >
-        New Chat
+        {t("new_chat")}
       </p>
       <div
         className="chat-box-container"
@@ -107,44 +124,42 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
             scrollbarColor: `${currentTheme?.scroll_bar_color} ${currentTheme?.cb_bg_color}`,
           }}
         >
-          {props.chats && props.chats.map((chat, index) => (
-            <ChatCard
-              key={index}
-              type={chat.type}
-              sender={chat.sender} // ai or user
-              text={chat.text} // Chat message
-              timestamp={chat.timestamp} // Message timestamp
-              userProfileImage={props.userProfileImage} // Profile image URL (optional)
-              userName={props.userName} // Name of the user (optional)
-              aiName={props.aiName} // Name of the AI (optional)
-              aiProfileImage={props.aiProfileImage} // Profile image URL of AI (optional)
-              ratingEnabled={chat.ratingEnabled ?? true} // Enable/disable rating (default true)
-              textFeedbackEnabled={chat.textFeedbackEnabled ?? true} // Enable/disable text feedback (default true)
-              isProfileImageRequired={props.isProfileImageRequired ?? false} // Show profile image (default false)
-              onStarClick={props.onStarClick} // Callback for star click
-              feedback={chat.feedback || ""} // Existing feedback text (optional)
-              rating={chat.rating || 0} // Existing rating (default 0)
-              chatId={chat.chatId || ""} // Chat ID for reference
-              sessionId={chat.sessionId || props.sessionId || ""} // Session ID for reference
-              onTextFeedbackSubmit={props.onTextFeedbackSubmit} // Callback for text feedback submission
-              actionCardTitle={chat.actionCardTitle} // Action card title (optional)
-              actions={chat.actions} // Action card buttons
-              actionCardSubtitle={chat.actionCardSubtitle} // Action card subtitle (optional)
-              handleActionCardClick={props.handleActionCardClick} // Callback for action card button click
-              pdfUploaded={chat.pdfUploaded} // PDF uploaded status
-              pdfUrl={chat.pdfUrl} // PDF URL
-
-            />
-          ))}
-          {/* {
-            props.isResponseLoading && ( */}
-              <ChatLoader
-                isProfileImageRequired={props.isProfileImageRequired}
-                aiName={props.aiName}
-                aiProfileImage={props.aiProfileImage}
+          {props.chats &&
+            props.chats.map((chat, index) => (
+              <ChatCard
+                key={index}
+                type={chat.type}
+                sender={chat.sender} // ai or user
+                text={chat.text} // Chat message
+                timestamp={chat.timestamp} // Message timestamp
+                userProfileImage={props.userProfileImage} // Profile image URL (optional)
+                userName={props.userName} // Name of the user (optional)
+                aiName={props.aiName} // Name of the AI (optional)
+                aiProfileImage={props.aiProfileImage} // Profile image URL of AI (optional)
+                ratingEnabled={chat.ratingEnabled ?? true} // Enable/disable rating (default true)
+                textFeedbackEnabled={chat.textFeedbackEnabled ?? true} // Enable/disable text feedback (default true)
+                isProfileImageRequired={props.isProfileImageRequired ?? false} // Show profile image (default false)
+                onStarClick={props.onStarClick} // Callback for star click
+                feedback={chat.feedback || ""} // Existing feedback text (optional)
+                rating={chat.rating || 0} // Existing rating (default 0)
+                chatId={chat.chatId || ""} // Chat ID for reference
+                sessionId={chat.sessionId || props.sessionId || ""} // Session ID for reference
+                onTextFeedbackSubmit={props.onTextFeedbackSubmit} // Callback for text feedback submission
+                actionCardTitle={chat.actionCardTitle} // Action card title (optional)
+                actions={chat.actions} // Action card buttons
+                actionCardSubtitle={chat.actionCardSubtitle} // Action card subtitle (optional)
+                handleActionCardClick={props.handleActionCardClick} // Callback for action card button click
+                pdfUploaded={chat.pdfUploaded} // PDF uploaded status
+                pdfUrl={chat.pdfUrl} // PDF URL
               />
-            {/* )
-          } */}
+            ))}
+          {props.isResponseLoading && (
+            <ChatLoader
+              isProfileImageRequired={props.isProfileImageRequired}
+              aiName={props.aiName}
+              aiProfileImage={props.aiProfileImage}
+            />
+          )}
         </div>
         <div className="chat-box-input-area">
           <div className="input-upload-container">
@@ -153,21 +168,26 @@ const ChatBox: React.FC<ChatBoxProps> = (props) => {
               className={`chat-box-input ${fontSize} ${contrast}`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyDown} 
               style={{
                 backgroundColor: currentTheme?.cb_input_bg_color,
                 borderColor: currentTheme?.cb_input_border_color,
                 color: currentTheme?.cc_primary_font_color,
               }}
             />
-            <input
-              type="file"
-              className="chat-box-file-input"
-              onChange={handleFileUpload}
-              id="input-file"
-            />
-            <label htmlFor="input-file" className="input-file-icon">
-              <UploadIcon />
-            </label>
+            {props.onFileUpload && (
+              <input
+                type="file"
+                className="chat-box-file-input"
+                onChange={handleFileUpload}
+                id="input-file"
+              />
+            )}
+            {props.onFileUpload && (
+              <label htmlFor="input-file" className="input-file-icon">
+                <UploadIcon />
+              </label>
+            )}
           </div>
           <button
             className={`chat-box-submit-btn ${message ? "" : "btn-disabled"}`}
