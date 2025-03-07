@@ -2,10 +2,18 @@ import React from "react";
 import "./accessibilityPage.css";
 import { useTheme } from "../../themeContext/themeProvider";
 import { FontSize, Contrast } from "../../themeContext/accessibilityTypes";
+import { useTranslation } from "../../Locales/translations";
 
 const Accessibility: React.FC = () => {
-  const { theme, themes, setFontSize, fontSize, contrast, setContrast } =
-    useTheme();
+  const {
+    theme,
+    themes,
+    setFontSize,
+    fontSize,
+    contrast,
+    setContrast
+  } = useTheme();
+  const { t } = useTranslation();
 
   const fontSizes: { size: string; label: string; name: FontSize }[] = [
     { size: "14px", label: "font-container-14", name: "small" },
@@ -19,6 +27,8 @@ const Accessibility: React.FC = () => {
     { contrast: "bold", label: "contrast-bold" },
     { contrast: "extra-bold", label: "contrast-extrabold" },
   ];
+
+
 
   const handleFontSizeSelect = (name: FontSize) => {
     setFontSize(name);
@@ -54,7 +64,7 @@ const Accessibility: React.FC = () => {
           color: currentTheme?.primary_font_color,
         }}
       >
-        Accessibility Settings
+        {t("accessibilitySettings")}
       </p>
       <div
         className="accessibility-container"
@@ -73,7 +83,7 @@ const Accessibility: React.FC = () => {
             onClick={() => handleFontSizeSelect(font?.name)}
             style={{ borderColor: currentTheme?.cb_input_border_color }}
           >
-            <p>I can read this font size comfortably.</p>
+            <p>{t("comfortableFontSize")}</p>
             {fontSize === font?.name && (
               <div className="selected">
                 <SelectedIcon />
@@ -100,7 +110,7 @@ const Accessibility: React.FC = () => {
                   </div>
                 )}
               </div>
-              <p>This contrast is comfortable.</p>
+              <p>{t("comfortableContrast")}</p>
             </div>
           ))}
         </div>

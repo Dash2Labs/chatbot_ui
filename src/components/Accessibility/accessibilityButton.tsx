@@ -1,6 +1,7 @@
 import React from "react";
 import "./accessibilityButton.css";
 import { useTheme } from "../../themeContext/themeProvider";
+import { useTranslation } from "../../Locales/translations";
 
 export interface AccessibilityButtonProps {
   icon?: React.ReactNode;
@@ -20,6 +21,7 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
   isCollapsed,
 }) => {
   const { theme, themes, fontSize, contrast } = useTheme();
+  const { t } = useTranslation();
 
   const currentTheme = themes[theme] || themes.light;
 
@@ -53,8 +55,8 @@ const AccessibilityButton: React.FC<AccessibilityButtonProps> = ({
       {icon || <AccessibilityIcon />}
       {!isCollapsed && (
         <div>
-          <p className={`${fontSize} ${contrast}`}>{title}</p>
-          <p className={`${fontSize} ${contrast}`}>{description}</p>
+          <p className={`${fontSize} ${contrast}`}>{t("isThisEasyToRead")}</p>
+          <p className={`${fontSize} ${contrast}`}>{t("ifNotClickHere")}</p>
         </div>
       )}
     </div>

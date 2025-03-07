@@ -1,0 +1,56 @@
+import React from "react";
+import "./signupModal.css";
+import SignupPage from "./signupPage";
+import { useTheme } from "../../themeContext/themeProvider";
+
+interface SignupModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onLogin: (username: string, password: string) => void;
+  onSignup: (username: string, password: string) => void;
+  onGuestLogin: () => void;
+}
+
+const SignupModal: React.FC<SignupModalProps> = ({
+  isOpen,
+  onClose,
+  onLogin,
+  onGuestLogin,
+  onSignup
+}) => {
+  if (!isOpen) return null;
+  const { theme, setTheme, themes, fontSize, contrast } = useTheme();
+  const currentTheme = themes[theme] || themes.light;
+  const CancelIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15.001"
+      viewBox="0 0 15 15.001"
+    >
+      <path
+        id="Union_19"
+        data-name="Union 19"
+        d="M9290.113,15a.872.872,0,0,1-.627-.26L9283.5,8.754l-5.982,5.985a.9.9,0,0,1-.627.26.887.887,0,0,1-.629-1.514l5.982-5.985-5.982-5.984a.888.888,0,1,1,1.256-1.255l5.982,5.985L9289.486.26a.886.886,0,0,1,1.252,1.254L9284.752,7.5l5.986,5.987a.887.887,0,0,1-.625,1.514Z"
+        transform="translate(-9275.998)"
+        style={{ fill: currentTheme?.font_color }}
+      />
+    </svg>
+  );
+  return (
+    <div className="signup-modal-backdrop">
+      <div className="signup-modal">
+        <button
+          className="modal-close-button"
+          onClick={onClose}
+          style={{ color: currentTheme?.cc_primary_font_color }}
+        >
+          <CancelIcon />
+        </button>
+        <SignupPage onLogin={onLogin} onGuestLogin={onGuestLogin} onSignup={onSignup}/>
+      </div>
+    </div>
+  );
+};
+
+export default SignupModal;

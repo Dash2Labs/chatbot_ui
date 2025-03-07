@@ -4,8 +4,6 @@ import WebChatbot from "./webChatbot";
 import { ThemeProvider } from "../../themeContext/themeProvider";
 import { FullChatbotProps } from "./chatbotProps";
 
-
-
 const FullChatbot: React.FC<FullChatbotProps> = (props) => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -46,18 +44,26 @@ const FullChatbot: React.FC<FullChatbotProps> = (props) => {
     compactLogo: props.compactLogo,
     isMobile: isMobile,
     handleActionCardClick: props.handleActionCardClick,
+    isResponseLoading: props.isResponseLoading,
+    onLogin: props.onLogin,
+    onGuestLogin: props.onGuestLogin,
+    toasterConfig: props.toasterConfig,
+    onSignup: props.onSignup,
   };
 
   return (
     <>
-      <ThemeProvider>
+      <ThemeProvider
+        onSettingsChange={props.onSettingsChange}
+        initialSettings={props.initialSettings}
+        customThemes={props.customThemes}
+      >
         {!isMobile ? (
           <WebChatbot {...commonProps} />
         ) : (
-          <MobileChatbot {...commonProps}  />
+          <MobileChatbot {...commonProps} />
         )}
       </ThemeProvider>
-
     </>
   );
 };

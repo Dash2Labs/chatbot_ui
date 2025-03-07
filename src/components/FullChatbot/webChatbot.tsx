@@ -6,12 +6,13 @@ import "./fullChatbot.css";
 import Accessibility from "../Accessibility/accessibilityPage";
 import { useTheme } from "../../themeContext/themeProvider";
 import { FullChatbotProps } from "./chatbotProps";
-
+import SignupModal from "../Signup/signupModal";
+import Toaster from "../Toaster/toaster";
 
 const WebChatbot: React.FC<FullChatbotProps> = (props) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
-  const { theme, themes } = useTheme();
+  const { theme, themes, isSignupOpen, setIsSignupOpen } = useTheme();
 
   const currentTheme = themes[theme] || themes.light;
   const toggleSidebar = () => {
@@ -68,10 +69,7 @@ const WebChatbot: React.FC<FullChatbotProps> = (props) => {
         <div className="toolbar">
           <Header
             userName={props.userName}
-            // handleToggle={onToggleTheme}
             userProfileImage={props.userProfileImage}
-            toggleLabel="Enable Dark Theme"
-            // isToggleChecked={theme === "dark"}
           />
         </div>
         <div className="main-pages">
@@ -94,10 +92,23 @@ const WebChatbot: React.FC<FullChatbotProps> = (props) => {
               aiProfileImage={props.aiProfileImage}
               isProfileImageRequired={props.isProfileImageRequired}
               handleActionCardClick={props.handleActionCardClick}
+              isResponseLoading={props.isResponseLoading}
             />
           )}
         </div>
       </div>
+      {isSignupOpen && (
+        <SignupModal
+          isOpen={isSignupOpen}
+          onClose={() => setIsSignupOpen(false)}
+          onLogin={props.onLogin || (() => {})}
+          onSignup={props.onSignup || (() => {})}
+          onGuestLogin={props.onGuestLogin || (() => {})}
+        />
+      )}
+      {props.toasterConfig?.isToasterOpen && (
+        <Toaster toasterConfig={props.toasterConfig} />
+      )}
     </div>
   );
 };

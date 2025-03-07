@@ -6,6 +6,8 @@ import messageIcon from "../../assets/messageIcon.svg";
 import { useTheme } from "../../themeContext/themeProvider";
 import { HistoryCardProps } from "../Cards/historyCard.types";
 import { HistoryBoxProps } from "./historyBox.types";
+import { useTranslation } from "../../Locales/translations";
+import noChatIcon from "../../assets/no-chats.svg";
 
 const HistoryBox: React.FC<HistoryBoxProps> = ({
   history,
@@ -30,6 +32,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { theme, themes, fontSize, contrast } = useTheme();
+  const { t } = useTranslation();
 
   const currentTheme = themes[theme] || themes.light;
 
@@ -108,7 +111,8 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
             <div className="new-chat-btn">
               <button
                 className={`${fontSize}`}
-                style={{ color: currentTheme?.primary_color }}
+                style={{ color: currentTheme?.primary_color , cursor: "pointer" }}
+                onClick={onCreateNewChat}
               >
                 <PlusIcon />{" "}
                 <span style={{ marginLeft: "10px" }}>Start a new chat</span>
@@ -118,7 +122,7 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
               <input
                 type="text"
                 className={`history-box-input ${fontSize} ${contrast}`}
-                placeholder="Search"
+                placeholder={t("search")}
                 value={searchTerm}
                 onChange={(e) => handleSearchTermChange(e.target.value)}
               />
@@ -147,6 +151,14 @@ const HistoryBox: React.FC<HistoryBoxProps> = ({
                 />
               ))}
             </div>
+            {/* <div className="no-data-wrapper">
+              <div style={{ background: currentTheme?.main_container_bg }}>
+                <img src={noChatIcon} />
+                <p className={`${fontSize} ${contrast}`}>
+                  You have no active chats
+                </p>
+              </div>
+            </div> */}
           </>
         ) : (
           <div className="icon-view">
